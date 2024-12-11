@@ -21,6 +21,15 @@ $height: 5.5rem;
     }
 
     :global {
+        .ant-menu {
+            height: calc(100vh - calc($height + 0.1rem));
+            overflow-y: auto;
+            &::-webkit-scrollbar {
+                width: 0.3rem;
+                height: 0.3rem;
+            }
+        }
+
         .ant-menu-submenu-title,
         .ant-menu-item {
             text-align: center;
@@ -156,6 +165,8 @@ $height: 5.5rem;
 
 .tabHistory {
     height: 4.8rem;
+    overflow-x: auto;
+    overflow-y: hidden;
 
     .unselectedTag {
         background: var(--ant-color-bg-base);

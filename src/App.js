@@ -15,12 +15,16 @@ dayjs.locale('zh-cn');
 const BasicLayout = lazy(() => import('./layout'));
 
 const App = () => {
-        const {themeConfig, setDeviceInfo} = useGlobalStore();
+        const {themeConfig, setDeviceInfo, setThemeConfig} = useGlobalStore();
         const {t} = useTranslation()
 
         const handleResize = () => {
+                const isPhone = isMobile()
+                setThemeConfig({
+                        collapsed: isPhone
+                })
                 setDeviceInfo({
-                        isPhone: isMobile()
+                        isPhone
                 })
         }
 
@@ -35,6 +39,7 @@ const App = () => {
                         }
                         return data
                 }
+                handleResize()
                 window.addEventListener('resize', handleResize);
 
                 return () => {

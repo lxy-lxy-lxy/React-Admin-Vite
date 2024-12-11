@@ -27,6 +27,7 @@ const TableTool = lazy(ng(() => import('@pages/DevTool/TableTool')));
 const EditorTool = lazy(ng(() => import('@pages/DevTool/EditorTool')));
 const ThemeTool = lazy(ng(() => import('@pages/DevTool/ThemeTool')));
 const ButtonTool = lazy(ng(() => import('@pages/DevTool/ButtonTool')));
+const FormTool = lazy(ng(() => import('@pages/DevTool/DataTool/FormTool')));
 
 const routes = [
         {
@@ -65,7 +66,10 @@ const routes = [
                                                         {path: '/devTool/ButtonTool', title: '按钮', element: <ButtonTool/>},
                                                         {
                                                                 path: '/devTool/DataTool',
-                                                                title: '数据录入'
+                                                                title: '数据录入',
+                                                                children: [
+                                                                        {path: '/devTool/DataTool/FormTool', title: '表单', element: <FormTool/>},
+                                                                ]
                                                         }
                                                 ]
                                         },

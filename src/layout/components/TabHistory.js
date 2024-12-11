@@ -56,7 +56,7 @@ const TabHistory = () => {
         }
 
         return (
-                <Flex wrap align="center" className={styles.tabHistory}>
+                <Flex align="center" className={styles.tabHistory}>
                         {tagHistory.map((tag) => {
                                 const isSelect = pathname === tag
                                 return <Tag

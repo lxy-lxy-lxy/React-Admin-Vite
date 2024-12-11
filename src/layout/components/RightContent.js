@@ -13,7 +13,7 @@ import styles from '../index.module.scss'
 
 const RightContent = () => {
         const navigate = useNavigate();
-        const {themeConfig, setThemeConfig} = useGlobalStore();
+        const {themeConfig, deviceInfo, setThemeConfig} = useGlobalStore();
 
         const handleLangClick = ({key}) => {
                 setLocale(key)
@@ -57,7 +57,12 @@ const RightContent = () => {
                 setThemeConfig(e.target.value);
         };*/
 
-        return <Space size={15} wrap className={styles.rightContent}>
+        return <Space
+                size={15}
+                wrap
+                className={styles.rightContent}
+                style={{display: !themeConfig.collapsed && deviceInfo.isPhone ? 'none' : ''}}
+        >
                 <Switch
                         defaultChecked={themeConfig.mode === 'dark'}
                         checkedChildren={<MoonOutlined/>}

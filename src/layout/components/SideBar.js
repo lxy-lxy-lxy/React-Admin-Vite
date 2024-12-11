@@ -63,7 +63,7 @@ const SideBar = () => {
         return <Fragment>
                 {(!deviceInfo.isPhone || !collapsed) &&
                         <Sider
-                                theme={!themeConfig.menuExtend ? "dark" : "light"}
+                                theme={!themeConfig.menuExtend ? 'dark' : 'light'}
                                 collapsible={false}
                                 collapsed={false}
                                 className={styles.firstSider}
@@ -72,7 +72,7 @@ const SideBar = () => {
                                         <img alt="" src={logo} width={45} height={45}/>
                                 </div>
                                 <Menu
-                                        theme={!themeConfig.menuExtend ? "dark" : "light"}
+                                        theme={!themeConfig.menuExtend ? 'dark' : 'light'}
                                         selectedKeys={parentSelectedKey}
                                         items={collapsed ? menuItems : menuItems.map(item => ({...item, children: null}))}
                                         onClick={e => onMenuClick(e, collapsed ? 'child' : 'parent')}
