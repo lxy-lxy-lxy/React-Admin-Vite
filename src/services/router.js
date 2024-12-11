@@ -28,6 +28,9 @@ const EditorTool = lazy(ng(() => import('@pages/DevTool/EditorTool')));
 const ThemeTool = lazy(ng(() => import('@pages/DevTool/ThemeTool')));
 const ButtonTool = lazy(ng(() => import('@pages/DevTool/ButtonTool')));
 const FormTool = lazy(ng(() => import('@pages/DevTool/DataTool/FormTool')));
+const DateTool = lazy(ng(() => import('@pages/DevTool/DataTool/DateTool')));
+const RadioTool = lazy(ng(() => import('@pages/DevTool/DataTool/RadioTool')));
+const CheckTool = lazy(ng(() => import('@pages/DevTool/DataTool/CheckTool')));
 
 const routes = [
         {
@@ -69,6 +72,9 @@ const routes = [
                                                                 title: '数据录入',
                                                                 children: [
                                                                         {path: '/devTool/DataTool/FormTool', title: '表单', element: <FormTool/>},
+                                                                        {path: '/devTool/DataTool/DateTool', title: '日期选择器', element: <DateTool/>},
+                                                                        {path: '/devTool/DataTool/RadioTool', title: '单选框', element: <RadioTool/>},
+                                                                        {path: '/devTool/DataTool/CheckTool', title: '多选框', element: <CheckTool/>},
                                                                 ]
                                                         }
                                                 ]
