@@ -37,10 +37,12 @@ const routes = [
                                 errorElement: <ErrorPage/>,
                                 children: [
                                         {
-                                                index: true,
                                                 title: '工作台',
                                                 icon: <DashboardOutlined/>,
-                                                element: <Dashboard/>
+                                                path: '',
+                                                children: [
+                                                        {index: true, title: '首页', element: <Dashboard/>}
+                                                ]
                                         },
                                         {
                                                 path: 'account',
