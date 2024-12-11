@@ -1,0 +1,45 @@
+.proSearch {
+  max-width: none;
+  padding: 1.2rem 0;
+
+  :global {
+    @media (min-width: 1600px) {
+      .ant-col-xxl-5 {
+        flex: 0 0 20%;
+        max-width: 20%;
+      }
+      .ant-col-offset-5 {
+        margin-inline-start: 20%;
+      }
+
+      .ant-col-xxl-10 {
+        flex: 0 0 40%;
+        max-width: 40%;
+      }
+      .ant-col-offset-10 {
+        margin-inline-start: 40%;
+      }
+
+      .ant-col-xxl-15 {
+        flex: 0 0 60%;
+        max-width: 60%;
+      }
+      .ant-col-offset-15 {
+        margin-inline-start: 60%;
+      }
+
+      .ant-col-xxl-20 {
+        flex: 0 0 80%;
+        max-width: 80%;
+      }
+      .ant-col-offset-20 {
+        margin-inline-start: 80%;
+      }
+
+      .ant-col-xxl-25 {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}
