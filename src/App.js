@@ -9,6 +9,11 @@ import 'dayjs/locale/zh-cn';
 import 'antd/dist/reset.css';
 import {useTranslation} from 'react-i18next';
 import {getLocale, isMobile} from '@utils/utils';
+import { mockXHR } from '@mock'
+
+if(import.meta.env.MODE === 'development'){
+        mockXHR();
+}
 
 dayjs.locale('zh-cn');
 

@@ -63,7 +63,6 @@
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@babel/plugin-transform-react-jsx": "^7.25.9",
-    "@faker-js/faker": "^8.0.1",
     "@vitejs/plugin-react": "^4.3.3",
     "dotenv": "^16.4.7",
     "eslint": "8.56.0",
@@ -73,6 +72,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^13.2.1",
     "minimist": "^1.2.8",
+    "mockjs": "^1.1.0",
     "prettier": "^3.3.3",
     "rollup-plugin-external-globals": "^0.13.0",
     "rollup-plugin-visualizer": "^5.12.0",

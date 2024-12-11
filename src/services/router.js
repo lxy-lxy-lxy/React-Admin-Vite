@@ -20,9 +20,15 @@ const ng = (func) => () => {
         })
 }
 
+// 工作台
 const Dashboard = lazy(ng(() => import('@pages/Dashboard')));
-const AccountCenter = lazy(ng(() => import('@pages/AccountPage/AccountCenter')));
-const AccountSettings = lazy(ng(() => import('@pages/AccountPage/AccountSettings')));
+
+// 配置中心
+const AccountCenter = lazy(ng(() => import('@pages/Setting/AccountCenter')));
+const UserManage = lazy(ng(() => import('@pages/Setting/UserManage')));
+const RoleManage = lazy(ng(() => import('@pages/Setting/RoleManage')));
+
+// DEV工具
 const TableTool = lazy(ng(() => import('@pages/DevTool/TableTool')));
 const EditorTool = lazy(ng(() => import('@pages/DevTool/EditorTool')));
 const ThemeTool = lazy(ng(() => import('@pages/DevTool/ThemeTool')));
@@ -50,12 +56,13 @@ const routes = [
                                                 ]
                                         },
                                         {
-                                                path: 'account',
-                                                title: '个人页',
+                                                path: 'setting',
+                                                title: '配置',
                                                 icon: <UserOutlined/>,
                                                 children: [
-                                                        {path: '/account/AccountCenter', title: '个人中心', element: <AccountCenter/>},
-                                                        {path: '/account/AccountSettings', title: '个人设置', element: <AccountSettings/>}
+                                                        {path: '/setting/AccountCenter', title: '个人中心', element: <AccountCenter/>},
+                                                        {path: '/setting/UserManage', title: '用户管理', element: <UserManage/>},
+                                                        {path: '/setting/RoleManage', title: '角色管理', element: <RoleManage/>},
                                                 ]
                                         },
                                         {

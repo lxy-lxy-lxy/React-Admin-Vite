@@ -44,7 +44,6 @@ service.interceptors.request.use( // 请求拦截
                 if (token) config.headers['X-Token'] = token
                 config.headers['lang'] = localStorage.getItem('local')
 
-                console.log(config.mock)
                 let reqData = '';
                 // 处理如url相同请求参数不同时上一个请求被屏蔽的情况
                 if (config.method === 'get') {
@@ -72,7 +71,7 @@ service.interceptors.response.use( // 回复拦截，主要针对部分回掉数
                 const {data, status} = response
                 if (status === 200) {
                         const {code} = data
-                        if (code === 0) {
+                        if (code === 200) {
                                 return data.data
                         } else {
                                 message.error({

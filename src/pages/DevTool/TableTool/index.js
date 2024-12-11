@@ -18,7 +18,7 @@ const columns = [
         },
         {
                 title: 'Column 1',
-                dataIndex: 'number',
+                dataIndex: 'account',
                 key: '1'
         },
         {
@@ -33,16 +33,13 @@ const columns = [
         },
         {
                 title: 'Column 4',
-                dataIndex: 'status',
+                dataIndex: 'deptName',
                 key: '4'
         },
         {
                 title: 'Column 5',
-                dataIndex: 'labels',
+                dataIndex: 'phone',
                 key: '5',
-                render: (text) => {
-                        return JSON.stringify(text)
-                }
         },
         {
                 title: 'Action',
