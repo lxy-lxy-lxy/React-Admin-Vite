@@ -7,7 +7,7 @@ import {resolve} from "path";
 import './config/env.js';
 
 export default defineConfig({
-    base: "/React-Admin-Vite/",
+    base: process.env.NODE_ENV === 'local' ? "/" : "/React-Admin-Vite/",
     envDir: "env",
     define: {
         global: 'window',

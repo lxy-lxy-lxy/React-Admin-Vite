@@ -34,10 +34,10 @@
     "zustand": "^4.5.5"
   },
   "scripts": {
-    "start": "vite --mode development",
+    "start": "vite",
     "test": "vite --mode test",
     "prod": "vite --mode production",
-    "build": "vite build --mode development",
+    "build": "vite build",
     "build:test": "vite build --mode test",
     "build:prod": "vite build --mode production",
     "preview": "vite preview --port 8080",
