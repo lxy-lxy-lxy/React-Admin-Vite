@@ -7,7 +7,6 @@ import {resolve} from "path";
 import './config/env.js';
 
 export default defineConfig({
-    base: "/React-Admin-Vite/",
     envDir: "env",
     define: {
         global: 'window',
@@ -27,6 +26,7 @@ export default defineConfig({
             "@config": resolve(__dirname, "config"),
             "@pages": resolve(__dirname, "src", "pages"),
             "@locales": resolve(__dirname, "src", "locales"),
+            "@mock": resolve(__dirname, "src", "mock"),
             "@components": resolve(__dirname, "src", "components"),
             "@stores": resolve(__dirname, "src", "stores"),
             "@services": resolve(__dirname, "src", "services"),
