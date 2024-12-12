@@ -30,6 +30,7 @@ export function logoutClearStorage() {
         const lang = localStorage.getItem('local') || 'cn'
         const globalStore = localStorage.getItem('globalStore') || '{}'
         localStorage.clear()
+        sessionStorage.clear()
         changeLanguage(lang)
         localStorage.setItem('local', lang)
         localStorage.setItem('globalStore', globalStore)

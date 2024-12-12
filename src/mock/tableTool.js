@@ -2,7 +2,7 @@ import {mock} from 'mockjs'
 
 export default [
         {
-                url: '/Api/TableTool/GetTableList',
+                url: '/tableTool/getTableList',
                 type: 'get',
                 response: ({query}) => {
                         return {

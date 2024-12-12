@@ -203,12 +203,12 @@ ProSearch.propTypes = {
         childNode: PropTypes.arrayOf(
                 PropTypes.shape({
                         // 占位倍数配置，为数字时表示每项默认为n倍预设宽度(默认1)
-                        countSpan: PropTypes.oneOf([PropTypes.shape({
+                        countSpan: PropTypes.shape({
                                 xxl: PropTypes.number,
                                 xl: PropTypes.number,
                                 md: PropTypes.number,
                                 sm: PropTypes.number
-                        }), PropTypes.number]),
+                        }) || PropTypes.number,
                         element: PropTypes.element
                 })
         )

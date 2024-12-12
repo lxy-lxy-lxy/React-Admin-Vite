@@ -23,7 +23,7 @@ const ProTable = (props) => {
     total,
     scrollX = 1500,
     loading,
-    allowSearch = true,
+    allowSearch = false,
     allowCreate = true,
     allowExport = false,
     allowFullScreen = true,
@@ -122,9 +122,8 @@ const ProTable = (props) => {
             className="mb-1 mr-1"
             placeholder="input search text"
             onSearch={(e) => {
-              console.log(e);
               getData({
-                search: e,
+                keyword: e,
               });
             }}
             style={{
@@ -199,6 +198,7 @@ ProTable.propTypes = {
   total: PropTypes.number,
   scrollX: PropTypes.number,
   loading: PropTypes.bool,
+  allowSearch: PropTypes.bool,
   allowCreate: PropTypes.bool,
   allowExport: PropTypes.bool,
   allowFullScreen: PropTypes.bool,

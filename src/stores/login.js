@@ -11,7 +11,7 @@ const useLoginStore = create()(
                         getUserInfo: async (params) => {
                                 const {token, ...res} = await axios.post(login, {
                                         ...params
-                                }, {mock: {id: 1, token: "abcdefghijklmnopqrstuvwxyz"}})
+                                })
                                 localStorage.setItem('token', token)
                                 set(() => ({userInfo: res}));
                         },

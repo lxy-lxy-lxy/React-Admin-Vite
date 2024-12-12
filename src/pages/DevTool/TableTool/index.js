@@ -4,7 +4,6 @@ import ProTable from "@components/ProTable";
 import ProSearch from "@components/ProSearch";
 import { useTool } from "@stores/tool";
 
-console.log(import.meta.env);
 const columns = [
   {
     title: global.t("ID"),

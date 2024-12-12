@@ -37,7 +37,7 @@ const Login = () => {
         const onFinish = (e) => {
                 return getUserInfo({
                         ...e,
-                        password: md5(e.password, 'admin')
+                        password: md5(e.password)
                 }).then(() => {
                         message.success('登录成功🎉🎉🎉');
                         navigate('/', {replace: true});

@@ -1,6 +1,6 @@
 import axios from '@services/axios';
 
-const tableData = '/Api/TableTool/GetTableList'
+const tableData = '/tableTool/getTableList'
 
 export const createTableStore = (set) => ({
         table: {
