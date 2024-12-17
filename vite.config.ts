@@ -1,12 +1,15 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { visualizer } from "rollup-plugin-visualizer";
+import externalGlobals from "rollup-plugin-external-globals";
 import { resolve } from "path";
 import "./config/env.js";
 
+const isLocal = process.env.NODE_ENV === "local";
+
 // https://vite.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV === "local" ? "/" : "/React-Admin-Vite/",
+  base: isLocal ? "/" : "/React-Admin-Vite/",
   envDir: "env",
   define: {
     global: "window",
@@ -41,12 +44,23 @@ export default defineConfig({
   plugins: [
     react(),
     visualizer({
-      open: true, //build后，是否自动打开分析页面，默认false
-      gzipSize: false, //是否分析gzip大小
-      brotliSize: true, //是否分析brotli大小
+      open: isLocal, //build后，是否自动打开分析页面，默认false
+      gzipSize: isLocal, //是否分析gzip大小
+      brotliSize: isLocal, //是否分析brotli大小
       //filename: 'stats.html'//分析文件命名
     }),
   ],
+  optimizeDeps: {
+    include: ["nprogress", "lodash-es"],
+    esbuildOptions: {
+      loader: {
+        ".js": "jsx",
+      },
+      define: {
+        global: "globalThis",
+      },
+    },
+  },
   build: {
     modulePreload: {
       resolveDependencies(_, deps) {
@@ -55,23 +69,14 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ["react", "react-dom", "dayjs", "antd"],
-      // plugins: [
-      //   externalGlobals({
-      //     react: "React",
-      //     "react-dom": "ReactDOM",
-      //     dayjs: "dayjs",
-      //     antd: "antd",
-      //   }),
-      // ],
-      output: {
-        format: "es",
-        globals: {
+      plugins: [
+        externalGlobals({
           react: "React",
           "react-dom": "ReactDOM",
           dayjs: "dayjs",
           antd: "antd",
-        },
-      },
+        }),
+      ],
     },
   },
 });
