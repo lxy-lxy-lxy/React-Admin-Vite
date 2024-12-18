@@ -1,17 +1,19 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import axios from "@services/axios";
+import { post } from "@services/axios.ts";
 
 const login = "/user/login";
 
-const useLoginStore = create()(
+const useLoginStore = create<LoginInfo.LoginState>()(
   persist(
     (set) => ({
-      userInfo: null,
+      userInfo: undefined,
       getUserInfo: async (params) => {
-        const { token, ...res } = await axios.post(login, {
-          ...params,
-        });
+        const data = await post<LoginInfo.User & { token: string }>(
+          login,
+          params,
+        );
+        const { token, ...res } = data;
         localStorage.setItem("token", token);
         set(() => ({ userInfo: res }));
       },

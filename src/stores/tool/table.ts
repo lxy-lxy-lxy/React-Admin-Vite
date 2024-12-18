@@ -1,4 +1,4 @@
-import axios from "@services/axios";
+import { get } from "@services/axios";
 
 const tableData = "/tableTool/getTableList";
 
@@ -14,7 +14,7 @@ export const createTableStore = (set) => ({
       state.table.loading = true;
       state.table.searchParams = params;
     });
-    const { total, list } = await axios.get(tableData, { params }).catch(() => {
+    const { total, list } = await get(tableData, params).catch(() => {
       set((state) => {
         state.table.loading = false;
       });

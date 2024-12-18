@@ -14,7 +14,7 @@ const AuthRoute: FC<AuthRouteProps> = ({ children }) => {
 
   const obj: { [key: string]: boolean } = {};
 
-  // 如果token存在 直接正常渲染
+  // 如果token存在 渲染界面
   if (!userInfo) {
     return <Navigate to="/login" replace />;
   } else if (isAdmin || obj[pathname]) {

@@ -106,25 +106,28 @@ const ProSearch: FC<Props> = ({ formName, childNode }) => {
     if (len > 0) {
       childNode.forEach((item, i) => {
         const tempObj: ResponsiveObj = cloneDeep(spanObj);
-        const obj = Object.keys(curSpan).reduce((pre, next) => {
-          const count =
-            item.countSpan !== undefined
-              ? typeof item.countSpan === "number"
-                ? item.countSpan
-                : item.countSpan[next] === undefined
-                  ? 1
-                  : item.countSpan[next]
-              : 1;
-          countObj[next] = (countObj[next] || 0) + count;
-          const val = curSpan[next] * count;
-          tempObj[next] = (spanObj[next] || 0) + val;
-          pre[next] = val;
-          return pre;
-        }, {});
+        const obj = (Object.keys(curSpan) as Responsive[]).reduce(
+          (pre: ResponsiveObj, next) => {
+            const count =
+              item.countSpan !== undefined
+                ? typeof item.countSpan === "number"
+                  ? item.countSpan
+                  : item.countSpan[next] === undefined
+                    ? 1
+                    : item.countSpan[next]
+                : 1;
+            countObj[next] = (countObj[next] || 0) + count;
+            const val = (curSpan[next] || 0) * count;
+            tempObj[next] = (spanObj[next] || 0) + val;
+            pre[next] = val;
+            return pre;
+          },
+          {},
+        );
 
         if (!expand) {
-          Object.keys(tempObj).forEach((item) => {
-            if (tempObj[item] > getNum(item)) {
+          (Object.keys(tempObj) as Responsive[]).forEach((item) => {
+            if ((tempObj[item] || 0) > getNum(item)) {
               obj[item] = 0;
               tempObj[item] = spanObj[item] || 0;
             }

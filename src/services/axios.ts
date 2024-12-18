@@ -75,7 +75,7 @@ service.interceptors.response.use(
     if (status === 200) {
       const { code } = data;
       if (code === 200) {
-        return data.data;
+        return data;
       } else {
         message.error({
           content: getErrorStr(code),
@@ -119,4 +119,22 @@ service.interceptors.response.use(
   },
 );
 
-export default service;
+export async function get<T>(url: string, params?: unknown): Promise<T> {
+  const response = await service.get<T>(url, { params });
+  return response.data;
+}
+
+export async function post<T>(url: string, data?: unknown): Promise<T> {
+  const response = await service.post<T>(url, data);
+  return response.data;
+}
+
+export async function put<T>(url: string, data?: unknown): Promise<T> {
+  const response = await service.put<T>(url, data);
+  return response.data;
+}
+
+export async function del<T>(url: string, params?: unknown): Promise<T> {
+  const response = await service.delete<T>(url, { params });
+  return response.data;
+}

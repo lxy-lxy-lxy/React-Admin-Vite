@@ -11,12 +11,6 @@ import styles from "../index.module.scss";
 
 const { Item } = Form;
 
-interface UserInfo {
-  username: string;
-  password: string;
-  authCode: string;
-}
-
 const Login = () => {
   const { getUserInfo } = useLoginStore();
   const navigate = useNavigate();
@@ -25,7 +19,7 @@ const Login = () => {
     logoutClearStorage();
   }, []);
 
-  const onFinish = (e: UserInfo) => {
+  const onFinish = (e: LoginInfo.LoginForm) => {
     return getUserInfo({
       ...e,
       password: md5(e.password),

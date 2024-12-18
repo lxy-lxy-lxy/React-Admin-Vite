@@ -31,7 +31,6 @@ const App = () => {
   useEffect(() => {
     global.t = t;
 
-    global.t("213", { count: 123 });
     handleResize();
     window.addEventListener("resize", handleResize);
 
