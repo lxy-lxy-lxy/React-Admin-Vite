@@ -10,7 +10,15 @@ import {
 import { createTableStore } from "@stores/tool/table";
 
 export const useTool = createSelectors(
-  create()(
+  create<
+    DevTool.ToolState,
+    [
+      ["zustand/immer", never],
+      ["zustand/devtools", never],
+      ["zustand/subscribeWithSelector", never],
+      ["zustand/persist", DevTool.ToolState],
+    ]
+  >(
     immer(
       devtools(
         subscribeWithSelector(

@@ -1,8 +1,19 @@
 import { get } from "@services/axios";
+import { StateCreator } from "zustand";
 
 const tableData = "/tableTool/getTableList";
 
-export const createTableStore = (set) => ({
+export const createTableStore: StateCreator<
+  DevTool.ToolState,
+  [
+    ["zustand/immer", never],
+    ["zustand/devtools", never],
+    ["zustand/subscribeWithSelector", never],
+    ["zustand/persist", DevTool.ToolState],
+  ],
+  [],
+  TableTool.TableState
+> = (set) => ({
   table: {
     loading: false,
     list: [],
