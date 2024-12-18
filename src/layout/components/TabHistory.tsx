@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, FC, MouseEvent } from "react";
 import { Flex, Tag } from "antd";
 import { routes } from "@services/router";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import styles from "../index.module.scss";
 
-const TabHistory = () => {
+const TabHistory: FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [tagHistory, handleHistory] = useState(["/"]);
 
-  const setTagHistory = (key, opType = 1) => {
+  const setTagHistory = (key: string, opType = 1) => {
     let arr = [...tagHistory];
     const idx = tagHistory.findIndex((item) => item === pathname);
     if (opType === 1 && !tagHistory.find((item) => item === key)) {
@@ -53,7 +53,7 @@ const TabHistory = () => {
     if (menuItems[pathname]) setTagHistory(pathname);
   }, [pathname]);
 
-  const onClose = (e, key) => {
+  const onClose = (e: MouseEvent<HTMLElement, MouseEvent>, key: string) => {
     e.preventDefault();
     setTagHistory(key, 0);
   };

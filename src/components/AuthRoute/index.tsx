@@ -1,10 +1,10 @@
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, ReactElement } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import NoAuthPage from "@components/NoAuthPage";
 import { useLoginStore } from "@stores/index";
 
 interface AuthRouteProps {
-  children: PropsWithChildren;
+  children: PropsWithChildren | ReactElement;
 }
 
 const AuthRoute: FC<AuthRouteProps> = ({ children }) => {
@@ -12,7 +12,7 @@ const AuthRoute: FC<AuthRouteProps> = ({ children }) => {
   const { pathname } = useLocation();
   const isAdmin = true;
 
-  const obj = {};
+  const obj: { [key: string]: boolean } = {};
 
   // 如果token存在 直接正常渲染
   if (!userInfo) {

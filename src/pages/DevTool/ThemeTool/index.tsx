@@ -11,6 +11,7 @@ import {
 } from "antd";
 import { debounce } from "lodash-es";
 import { useGlobalStore } from "@stores/index";
+import type { ColorPickerProps } from "antd";
 
 interface Props {
   label: string;
@@ -35,7 +36,7 @@ const ThemeTool = () => {
   const [form] = Form.useForm();
   const { themeConfig, setThemeConfig, clearThemeConfig } = useGlobalStore();
 
-  const changeMainColor = (color) => {
+  const changeMainColor: ColorPickerProps["onChange"] = (color) => {
     form.setFieldValue("colorPrimary", color.toHexString());
   };
 

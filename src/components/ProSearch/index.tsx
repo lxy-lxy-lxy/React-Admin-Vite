@@ -1,23 +1,40 @@
-import { useEffect, useState, useMemo, FC, ReactElement, ReactNode, PropsWithChildren } from "react";
-import { Button, Col, Form, Row } from "antd";
+import {
+  useEffect,
+  useState,
+  useMemo,
+  FC,
+  ReactElement,
+  ReactNode,
+  PropsWithChildren,
+} from "react";
+import { Col, Form, Row } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { cloneDeep } from "lodash-es";
 import { useGlobalStore } from "@stores/index";
+import Button from "@components/Button";
 
 import styles from "./index.module.scss";
 
-const defaultSpan = {
+type Responsive = "xxl" | "xl" | "lg" | "md" | "sm" | "xs";
+
+type ResponsiveObj = {
+  [key in Extract<Responsive, string>]?: number;
+};
+
+const defaultSpan: ResponsiveObj = {
   xxl: 6,
   xl: 8,
+  lg: 8,
   md: 12,
   sm: 12,
   xs: 24,
 };
 
-const collapsedSpan = {
+const collapsedSpan: ResponsiveObj = {
   // 为实现五等分，xxl-5覆写为20%，xxl-10-15-20-25同理
   xxl: 5,
   xl: 6,
+  lg: 6,
   md: 8,
   sm: 24,
   xs: 24,
@@ -26,14 +43,7 @@ const collapsedSpan = {
 interface Props {
   formName: string;
   childNode: {
-    countSpan?:
-      | {
-          xxl?: number;
-          xl?: number;
-          md?: number;
-          sm?: number;
-        }
-      | number;
+    countSpan?: ResponsiveObj | number;
     element: Element | ReactElement | ReactNode | PropsWithChildren;
   }[];
 }
@@ -41,7 +51,7 @@ interface Props {
 const ProSearch: FC<Props> = ({ formName, childNode }) => {
   const [form] = Form.useForm();
   const [expand, setExpand] = useState(false);
-  const [size, setSize] = useState([]);
+  const [size, setSize] = useState<number[]>([]);
   const {
     themeConfig: { collapsed },
   } = useGlobalStore();
@@ -71,23 +81,31 @@ const ProSearch: FC<Props> = ({ formName, childNode }) => {
     setSize(arr);
   };
 
-  const { fields, countObj, spanObj } = useMemo(() => {
+  const {
+    fields,
+    countObj,
+    spanObj,
+  }: {
+    fields: ReactElement[];
+    countObj: ResponsiveObj;
+    spanObj: ResponsiveObj;
+  } = useMemo(() => {
     const len = childNode.length;
-    const arr = [];
-    let spanObj = {};
-    const countObj = {};
+    const arr: ReactElement[] = [];
+    let spanObj: ResponsiveObj = {};
+    const countObj: ResponsiveObj = {};
 
-    const getNum = (key) => {
+    const getNum = (key: Responsive) => {
       let sumSpan = 48;
       if (key === "xxl" && collapsed) {
         sumSpan = 50;
       }
-      return sumSpan - curSpan[key];
+      return sumSpan - (curSpan[key] || 0);
     };
 
     if (len > 0) {
       childNode.forEach((item, i) => {
-        const tempObj = cloneDeep(spanObj);
+        const tempObj: ResponsiveObj = cloneDeep(spanObj);
         const obj = Object.keys(curSpan).reduce((pre, next) => {
           const count =
             item.countSpan !== undefined
@@ -116,7 +134,7 @@ const ProSearch: FC<Props> = ({ formName, childNode }) => {
 
         arr.push(
           <Col {...obj} key={i}>
-            {item.element}
+            <>{item.element}</>
           </Col>,
         );
       });
@@ -141,15 +159,17 @@ const ProSearch: FC<Props> = ({ formName, childNode }) => {
     let val_b = false;
     let val_c = true;
 
-    const getData = (key) => {
+    const getData = (key: Responsive) => {
       let sumSpan = 24;
       if (key === "xxl" && collapsed) {
         sumSpan = 25;
       }
+
+      const val = curSpan[key] || 0;
       return {
-        a: sumSpan - curSpan[key] - (spanObj[key] % sumSpan),
-        b: countObj[key] > (sumSpan * 2) / curSpan[key] - 1,
-        c: countObj[key] > sumSpan / curSpan[key] - 1,
+        a: sumSpan - val - ((spanObj[key] || 0) % sumSpan),
+        b: (countObj[key] || 0) > (sumSpan * 2) / val - 1,
+        c: (countObj[key] || 0) > sumSpan / val - 1,
       };
     };
 
@@ -166,7 +186,7 @@ const ProSearch: FC<Props> = ({ formName, childNode }) => {
       curKey = "xs";
     }
 
-    const { a, b, c } = getData(curKey);
+    const { a, b, c } = getData(curKey as Responsive);
     val_a = a;
     val_b = b;
     val_c = c;
@@ -178,7 +198,7 @@ const ProSearch: FC<Props> = ({ formName, childNode }) => {
     };
   }, [fields, window.innerWidth]);
 
-  const onFinish = (values) => {
+  const onFinish = (values: object) => {
     console.log("Received values of form: ", values);
   };
 

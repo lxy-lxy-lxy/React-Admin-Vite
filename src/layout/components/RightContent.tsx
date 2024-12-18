@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Avatar, Dropdown, Space, Badge, Switch } from "antd";
 import { BellOutlined, MoonOutlined, SunOutlined } from "@ant-design/icons";
 import { getLocale, setLocale } from "@utils/utils";
@@ -11,7 +12,7 @@ import en from "@assets/img/flag/gb.svg";
 
 import styles from "../index.module.scss";
 
-const RightContent = () => {
+const RightContent: FC = () => {
   const navigate = useNavigate();
   const { themeConfig, deviceInfo, setThemeConfig } = useGlobalStore();
 

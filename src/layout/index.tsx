@@ -1,4 +1,4 @@
-import { StrictMode, Suspense, useEffect } from "react";
+import { CSSProperties, StrictMode, Suspense, useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { Card, Layout, Spin, theme } from "antd";
 import HeaderComp from "./components/Header";
@@ -23,7 +23,7 @@ const BasicLayout = () => {
     // 无感延迟放初次进入页面的闪烁
     setTimeout(() => {
       const layout = document.getElementById("rootLayout");
-      layout.style.display = "";
+      if (layout) layout.style.display = "";
     }, 188);
   }, []);
 
@@ -35,13 +35,15 @@ const BasicLayout = () => {
     <StrictMode>
       <Layout
         id="rootLayout"
-        style={{
-          minHeight: "100vh",
-          display: "none",
-          "--localeFont": ["cn", "hk"].includes(getLocale())
-            ? "1.4rem"
-            : "1rem",
-        }}
+        style={
+          {
+            "--localeFont": ["cn", "hk"].includes(getLocale())
+              ? "1.4rem"
+              : "1rem",
+            display: "none",
+            minHeight: "100vh",
+          } as CSSProperties
+        }
       >
         <SideBar />
         <Layout>
@@ -60,19 +62,19 @@ const BasicLayout = () => {
           </Header>
           <Content className={styles.layout}>
             <AuthRoute>
-              <Suspense
-                fallback={<Spin size="large" className="content_spin" />}
+              <Card
+                id="contentLayout"
+                wrap
+                gutter={[0, 50]}
+                layout="center"
+                style={{ minHeight: "100%" }}
               >
-                <Card
-                  id="contentLayout"
-                  wrap
-                  gutter={[0, 50]}
-                  layout="center"
-                  style={{ minHeight: "100%" }}
+                <Suspense
+                  fallback={<Spin size="large" className="content_spin" />}
                 >
                   <Outlet />
-                </Card>
-              </Suspense>
+                </Suspense>
+              </Card>
             </AuthRoute>
           </Content>
           <Footer id="footerLayout" style={{ textAlign: "center" }}>

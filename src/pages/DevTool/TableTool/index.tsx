@@ -54,7 +54,7 @@ const TableTool = () => {
     getTableData,
   } = useTool();
 
-  const getData = (params) => {
+  const getData = (params: object) => {
     getTableData({
       ...searchParams,
       ...params,

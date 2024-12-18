@@ -1,4 +1,9 @@
 /// <reference types="vite/client" />
-import { TFunction } from "react-i18next";
+/// <reference types="react-i18next" />
+interface globalInterface {
+  t: (str: string, msg?: object) => string;
+}
 
-declare const global: Window & { t: TFunction<"translation", undefined> };
+declare const global = {
+  t,
+} as globalInterface;

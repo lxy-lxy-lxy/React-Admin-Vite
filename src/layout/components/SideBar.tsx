@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { CSSProperties, FC, Fragment, useEffect, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import { useGlobalStore, useLoginStore } from "@stores/index";
@@ -6,17 +6,25 @@ import { routes } from "@services/router";
 import logo from "@assets/img/logo/logo.svg";
 
 import styles from "../index.module.scss";
+import type * as React from "react";
 
 const { Sider } = Layout;
 
-const SideBar = () => {
+interface MenuInfo {
+  key: string;
+  keyPath: string[];
+  item: React.ReactInstance;
+  domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
+}
+
+const SideBar: FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { themeConfig, deviceInfo } = useGlobalStore();
   const { collapsed } = themeConfig;
   const { userInfo } = useLoginStore();
   const [childMenus, setChildMenus] = useState([]);
-  const [parentSelectedKey, setParentSelectedKey] = useState([]);
+  const [parentSelectedKey, setParentSelectedKey] = useState<string[]>([]);
 
   const getItems = (children) => {
     return children.map((item) => {
@@ -49,7 +57,10 @@ const SideBar = () => {
     setParentSelectedKey(currentKey ? [currentKey] : []);
   }, [pathname]);
 
-  const onMenuClick = ({ key }, type = "child") => {
+  const onMenuClick: (e: MenuInfo, type?: "child" | "parent") => void = (
+    { key },
+    type = "child",
+  ) => {
     const isChild = type === "child";
     if (isChild) navigate(key);
     if (!isChild) {
@@ -94,10 +105,12 @@ const SideBar = () => {
       <Sider
         className={styles.secondSider}
         theme="light"
-        style={{
-          "--collapsed": collapsed ? "hidden" : "visible",
-          "--width": collapsed ? "0" : "20rem",
-        }}
+        style={
+          {
+            "--collapsed": collapsed ? "hidden" : "visible",
+            "--width": collapsed ? "0" : "20rem",
+          } as CSSProperties
+        }
         collapsible={false}
         collapsed={false}
       >

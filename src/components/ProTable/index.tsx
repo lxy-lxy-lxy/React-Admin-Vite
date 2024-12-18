@@ -17,8 +17,8 @@ const { Search } = Input;
 const showTotal = (total: number) => `Total ${total} `;
 
 interface Props extends TableProps {
-  getData: Function;
-  searchParams: object;
+  getData: (params: object) => void;
+  searchParams: { [key: string]: never };
   total: number;
   scrollX?: number;
   loading: boolean;
@@ -46,10 +46,10 @@ const ProTable: FC<Props> = (props) => {
   const { pathname } = useLocation();
   const { userConfig, setUserConfig } = useGlobalStore();
   const [fullscreen, setFullscreen] = useState(false);
-  const [height, setHeight] = useState(null);
+  const [height, setHeight] = useState<number | undefined>(undefined);
 
   useEffect(() => {
-    getData &&
+    if (getData) {
       getData(
         searchParams.pageSize
           ? {
@@ -60,7 +60,7 @@ const ProTable: FC<Props> = (props) => {
               pageSize: userConfig[pathname]?.pageSize || 30,
             },
       );
-
+    }
     const resizeObserver = new ResizeObserver(() => {
       onResize();
     });
@@ -82,11 +82,12 @@ const ProTable: FC<Props> = (props) => {
   };
 
   const onChange = (page: number, pageSize: number) => {
-    getData &&
+    if (getData) {
       getData({
         page,
         pageSize,
       });
+    }
   };
 
   const onResize = debounce((mode?: boolean) => {
@@ -97,10 +98,12 @@ const ProTable: FC<Props> = (props) => {
     if (tableBoxRef.current) {
       const content = document.getElementById("contentLayout");
       const footer = document.getElementById("footerLayout");
-      const head =
-        tableBoxRef.current.getElementsByClassName("ant-table-thead")[0];
-      const pagination =
-        tableBoxRef.current.getElementsByClassName("ant-pagination")[0];
+      const head = (tableBoxRef.current as Document).getElementsByClassName(
+        "ant-table-thead",
+      )[0];
+      const pagination = (
+        tableBoxRef.current as Document
+      ).getElementsByClassName("ant-pagination")[0] as HTMLDivElement;
 
       if (content && content.contains(tableBoxRef.current)) {
         const headRect = head.getBoundingClientRect();
