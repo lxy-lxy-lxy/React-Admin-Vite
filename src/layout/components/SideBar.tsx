@@ -48,7 +48,9 @@ const SideBar: FC = () => {
     type = "child",
   ) => {
     const isChild = type === "child";
-    if (isChild) navigate(key);
+    if (isChild) {
+      navigate(key);
+    }
     if (!isChild) {
       setChildMenus(menus.find((item) => item.key === key)?.children || []);
       setParentSelectedKey([key]);

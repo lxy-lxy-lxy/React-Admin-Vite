@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { visualizer } from "rollup-plugin-visualizer";
 import externalGlobals from "rollup-plugin-external-globals";
+import { VitePWA } from "vite-plugin-pwa";
 import { resolve } from "path";
 import "./config/env.js";
 
@@ -43,6 +44,12 @@ export default defineConfig({
   },
   plugins: [
     react(),
+    VitePWA({
+      registerType: "autoUpdate",
+      devOptions: {
+        enabled: true,
+      },
+    }),
     visualizer({
       open: isLocal, //build后，是否自动打开分析页面，默认false
       gzipSize: isLocal, //是否分析gzip大小

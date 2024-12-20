@@ -188,7 +188,7 @@ const ProTable: FC<Props> = (props) => {
           position: ["bottomCenter"],
           // defaultCurrent: searchParams.page || 1,
           defaultPageSize: (searchParams.pageSize ||
-            userConfig.pathname.pageSize ||
+            userConfig.pathname?.pageSize ||
             30) as number,
           pageSizeOptions: [10, 30, 50, 100],
           // hideOnSinglePage: true,

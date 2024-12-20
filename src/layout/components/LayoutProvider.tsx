@@ -55,13 +55,6 @@ const LayoutProvider: FC<PropsWithChildren> = (props) => {
   };
 
   useEffect(() => {
-    console.log(
-      getItems(
-        routes[0].children
-          ? routes[0].children.filter((item) => item.path !== "*")
-          : [],
-      ),
-    );
     setLayoutData(
       getItems(
         routes[0].children
