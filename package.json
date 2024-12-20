@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
+    "start": "vite --mode development",
     "test": "tsc -b && vite --mode test",
     "prod": "vite --mode production",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build --mode development",
     "build:test": "vite build --mode test",
     "build:prod": "vite build --mode production",
     "preview": "vite preview --port 8080",

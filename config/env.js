@@ -9,4 +9,5 @@ dotenv.config({ path: process.cwd() + "/env/" + ".env.local" });
 dotenv.config({ path: process.cwd() + "/env/" + ".env." + mode });
 dotenv.config({ path: process.cwd() + "/env/" + ".env" });
 
+console.log(process.env.VITE_NODE_ENV);
 process.env.NODE_ENV = process.env.VITE_NODE_ENV;
