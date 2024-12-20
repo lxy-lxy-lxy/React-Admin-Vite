@@ -9,7 +9,7 @@ export const createTableStore: StateCreator<
     ["zustand/immer", never],
     ["zustand/devtools", never],
     ["zustand/subscribeWithSelector", never],
-    ["zustand/persist", DevTool.ToolState],
+    ["zustand/persist", unknown],
   ],
   [],
   TableTool.TableState
@@ -20,23 +20,25 @@ export const createTableStore: StateCreator<
     total: 0,
     searchParams: {},
   },
-  getTableData: async (params) => {
-    set((state) => {
+  getTableData: async (params: TableTool.Params) => {
+    set((state: TableTool.TableState) => {
       state.table.loading = true;
       state.table.searchParams = params;
     });
-    const { total, list } = await get(tableData, params).catch(() => {
-      set((state) => {
+    try {
+      const { total, list } = await get<TableTool.Records>(tableData, params);
+      set({
+        table: {
+          loading: false,
+          list,
+          total,
+          searchParams: params,
+        },
+      });
+    } catch {
+      set((state: TableTool.TableState) => {
         state.table.loading = false;
       });
-    });
-    set({
-      table: {
-        loading: false,
-        list,
-        total,
-        searchParams: params,
-      },
-    });
+    }
   },
 });

@@ -1,7 +1,7 @@
 import Mock from "mockjs"; // 导入mockjs
-
 import loginApi from "./login";
 import tableToolApi from "./tableTool";
+import type { MockjsRequestOptions } from "mockjs";
 
 const mocks = [
   {
@@ -31,33 +31,26 @@ export function param2Obj(url: string) {
   );
 }
 
-// 关键！抄来一个前端模式构建函数（或者你也可以建一个mock server）
+interface MockOptions {
+  method: string;
+  body: object;
+  query: object;
+}
+
 export function mockXHR() {
-  Mock.XHR.prototype.proxy_send = Mock.XHR.prototype.send;
-  Mock.XHR.prototype.send = function () {
-    if (this.custom.xhr) {
-      this.custom.xhr.withCredentials = this.withCredentials || false;
-
-      if (this.responseType) {
-        this.custom.xhr.responseType = this.responseType;
-      }
-    }
-    this.proxy_send(...arguments);
-  };
-
-  function XHR2ExpressReqWrap(respond) {
-    return function (options) {
-      let result = null;
-      if (respond instanceof Function) {
+  function XHR2ExpressReqWrap(res?: (params: MockOptions) => unknown) {
+    return function (options: MockjsRequestOptions) {
+      let result;
+      if (res instanceof Function) {
         const { body, type, url } = options;
         // https://expressjs.com/en/4x/api.html#req
-        result = respond({
+        result = res({
           method: type,
           body: JSON.parse(body),
           query: param2Obj(url),
         });
       } else {
-        result = respond;
+        result = res;
       }
       return Mock.mock(result);
     };
@@ -69,7 +62,9 @@ export function mockXHR() {
         Mock.mock(
           new RegExp(fetch.url),
           fetch.type || "get",
-          XHR2ExpressReqWrap(fetch.response),
+          XHR2ExpressReqWrap(
+            fetch.response as (params: MockOptions) => unknown,
+          ),
         );
       }
     }

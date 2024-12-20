@@ -53,7 +53,7 @@ const TabHistory: FC = () => {
     if (menuItems[pathname]) setTagHistory(pathname);
   }, [pathname]);
 
-  const onClose = (e: MouseEvent<HTMLElement, MouseEvent>, key: string) => {
+  const onClose = (e: MouseEvent<HTMLElement>, key: string) => {
     e.preventDefault();
     setTagHistory(key, 0);
   };

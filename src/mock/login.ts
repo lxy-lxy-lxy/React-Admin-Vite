@@ -1,7 +1,14 @@
 import { mock } from "mockjs";
 import md5 from "md5";
 
-const userList = mock([
+interface UserInfo {
+  id: string;
+  username: string;
+  password: string;
+  token: string;
+}
+
+const userList: UserInfo[] = mock([
   {
     id: "1",
     username: "admin",
@@ -20,7 +27,7 @@ export default [
   {
     url: "/user/login",
     type: "post",
-    response: ({ body }) => {
+    response: ({ body }: { body: LoginInfo.LoginForm }) => {
       const user = userList.find((item) => item.username === body.username);
 
       if (!user || body.password !== md5(user.password)) {

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Checkbox, Form, Input, Select, Steps, Radio } from "antd";
+import type { FormProps } from "antd";
 import Button from "@components/Button";
+
 const { Option } = Select;
 const formItemLayout = {
   labelCol: {
@@ -45,21 +47,32 @@ const tailFormItemLayout = {
 
 const description = "This is a description.";
 
+interface FieldType {
+  layout: FormProps["layout"];
+  email: string;
+  password: string;
+  residence: string[];
+  prefix: number;
+}
+
 const FormTool = () => {
   const [form] = Form.useForm();
   const [current, setCurrent] = useState(0);
-  const [formLayout, setFormLayout] = useState("horizontal");
+  const [formLayout, setFormLayout] =
+    useState<FormProps["layout"]>("horizontal");
 
-  const onFormLayoutChange = ({ layout }) => {
+  const onFormLayoutChange: FormProps<FieldType>["onValuesChange"] = ({
+    layout,
+  }) => {
     if (layout) setFormLayout(layout);
   };
 
-  const onChange = (value) => {
+  const onChange = (value: number) => {
     console.log("onChange:", current);
     setCurrent(value);
   };
 
-  const onFinish = (values) => {
+  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     console.log("Received values of form: ", values);
     onChange(1);
   };
@@ -83,7 +96,6 @@ const FormTool = () => {
       <Steps
         className="mb-2"
         current={current}
-        // onChange={onChange}
         items={[
           {
             title: "Step 1",

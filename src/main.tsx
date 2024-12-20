@@ -5,8 +5,10 @@ import "@i18n/i18n.ts";
 import { mockXHR } from "@mock/index";
 import "./index.css";
 
-if (import.meta.env.MODE === "development") {
+if (["local", "development"].includes(import.meta.env.MODE)) {
   mockXHR();
 }
 
-createRoot(document.getElementById("root")!).render(<RouterProvider router={router} />);
+createRoot(document.getElementById("root")!).render(
+  <RouterProvider router={router} />,
+);

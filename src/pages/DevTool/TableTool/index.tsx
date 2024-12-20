@@ -136,7 +136,7 @@ const TableTool = () => {
       />
       <ProTable
         getData={getData}
-        searchParams={searchParams}
+        searchParams={{ ...searchParams }}
         columns={columns}
         dataSource={list}
         loading={loading}

@@ -8,36 +8,25 @@ import {
   UserOutlined,
   ToolOutlined,
 } from "@ant-design/icons";
-import NProgress from "nprogress";
-
-import "nprogress/nprogress.css";
-
-const ng = (func) => () => {
-  NProgress.start();
-  return func().then((e) => {
-    NProgress.done();
-    return e;
-  });
-};
 
 // 工作台
-const Dashboard = lazy(ng(() => import("@pages/Dashboard")));
+const Dashboard = lazy(() => import("@pages/Dashboard"));
 
 // 配置中心
-const AccountCenter = lazy(ng(() => import("@pages/Setting/AccountCenter")));
-const UserManage = lazy(ng(() => import("@pages/Setting/UserManage")));
-const RoleManage = lazy(ng(() => import("@pages/Setting/RoleManage")));
+const AccountCenter = lazy(() => import("@pages/Setting/AccountCenter"));
+const UserManage = lazy(() => import("@pages/Setting/UserManage"));
+const RoleManage = lazy(() => import("@pages/Setting/RoleManage"));
 
 // DEV工具
-const TableTool = lazy(ng(() => import("@pages/DevTool/TableTool")));
-const EditorTool = lazy(ng(() => import("@pages/DevTool/EditorTool")));
-const ThemeTool = lazy(ng(() => import("@pages/DevTool/ThemeTool")));
-const ButtonTool = lazy(ng(() => import("@pages/DevTool/ButtonTool")));
-const FormTool = lazy(ng(() => import("@pages/DevTool/DataTool/FormTool")));
-const DateTool = lazy(ng(() => import("@pages/DevTool/DataTool/DateTool")));
-const RadioTool = lazy(ng(() => import("@pages/DevTool/DataTool/RadioTool")));
-const CheckTool = lazy(ng(() => import("@pages/DevTool/DataTool/CheckTool")));
-const InputTool = lazy(ng(() => import("@pages/DevTool/DataTool/InputTool")));
+const TableTool = lazy(() => import("@pages/DevTool/TableTool"));
+const EditorTool = lazy(() => import("@pages/DevTool/EditorTool"));
+const ThemeTool = lazy(() => import("@pages/DevTool/ThemeTool"));
+const ButtonTool = lazy(() => import("@pages/DevTool/ButtonTool"));
+const FormTool = lazy(() => import("@pages/DevTool/DataTool/FormTool"));
+const DateTool = lazy(() => import("@pages/DevTool/DataTool/DateTool"));
+const RadioTool = lazy(() => import("@pages/DevTool/DataTool/RadioTool"));
+const CheckTool = lazy(() => import("@pages/DevTool/DataTool/CheckTool"));
+const InputTool = lazy(() => import("@pages/DevTool/DataTool/InputTool"));
 
 const routes = [
   {

@@ -5,13 +5,26 @@ import HeaderComp from "./components/Header";
 import { useLoginStore } from "@stores/index";
 import AuthRoute from "@components/AuthRoute";
 import SideBar from "./components/SideBar";
-
-import "antd/dist/reset.css";
-import styles from "./index.module.scss";
 import { getLocale } from "@utils/utils";
 import TabHistory from "./components/TabHistory";
+import NProgress from "nprogress";
+
+import "nprogress/nprogress.css";
+import "antd/dist/reset.css";
+import styles from "./index.module.scss";
 
 const { Header, Content, Footer } = Layout;
+
+const Loading = () => {
+  useEffect(() => {
+    NProgress.start();
+    return () => {
+      NProgress.done();
+    };
+  }, []);
+
+  return <Spin size="large" className="content_spin" />;
+};
 
 const BasicLayout = () => {
   const { userInfo } = useLoginStore();
@@ -62,16 +75,8 @@ const BasicLayout = () => {
           </Header>
           <Content className={styles.layout}>
             <AuthRoute>
-              <Card
-                id="contentLayout"
-                wrap
-                gutter={[0, 50]}
-                layout="center"
-                style={{ minHeight: "100%" }}
-              >
-                <Suspense
-                  fallback={<Spin size="large" className="content_spin" />}
-                >
+              <Card id="contentLayout" style={{ minHeight: "100%" }}>
+                <Suspense fallback={<Loading />}>
                   <Outlet />
                 </Suspense>
               </Card>

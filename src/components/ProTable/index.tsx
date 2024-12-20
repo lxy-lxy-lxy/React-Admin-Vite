@@ -18,7 +18,7 @@ const showTotal = (total: number) => `Total ${total} `;
 
 interface Props extends TableProps {
   getData: (params: object) => void;
-  searchParams: { [key: string]: never };
+  searchParams: { [key: string]: unknown };
   total: number;
   scrollX?: number;
   loading: boolean;
@@ -187,8 +187,9 @@ const ProTable: FC<Props> = (props) => {
           total,
           position: ["bottomCenter"],
           // defaultCurrent: searchParams.page || 1,
-          defaultPageSize:
-            searchParams.pageSize || userConfig[pathname]?.pageSize || 30,
+          defaultPageSize: (searchParams.pageSize ||
+            userConfig.pathname.pageSize ||
+            30) as number,
           pageSizeOptions: [10, 30, 50, 100],
           // hideOnSinglePage: true,
           showSizeChanger: true,

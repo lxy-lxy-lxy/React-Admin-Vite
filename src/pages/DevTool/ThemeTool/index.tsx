@@ -41,7 +41,7 @@ const ThemeTool = () => {
   };
 
   const onReset = () => {
-    clearThemeConfig({});
+    clearThemeConfig();
     setTimeout(() => {
       form.resetFields();
     }, 1);

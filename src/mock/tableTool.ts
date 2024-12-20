@@ -4,7 +4,7 @@ export default [
   {
     url: "/tableTool/getTableList",
     type: "get",
-    response: ({ query }) => {
+    response: ({ query }: { query: TableTool.Params }) => {
       return {
         code: 200,
         message: "操作成功",

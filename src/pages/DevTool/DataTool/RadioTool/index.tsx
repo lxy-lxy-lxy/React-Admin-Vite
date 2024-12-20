@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Radio } from "antd";
+import type { RadioChangeEvent } from "antd";
+
 const plainOptions = ["Apple", "Pear", "Orange"];
 const options = [
   {
@@ -36,19 +38,20 @@ const RadioTool = () => {
   const [value2, setValue2] = useState("Apple");
   const [value3, setValue3] = useState("Apple");
   const [value4, setValue4] = useState("Apple");
-  const onChange1 = ({ target: { value } }) => {
+
+  const onChange1 = ({ target: { value } }: RadioChangeEvent) => {
     console.log("radio1 checked", value);
     setValue1(value);
   };
-  const onChange2 = ({ target: { value } }) => {
+  const onChange2 = ({ target: { value } }: RadioChangeEvent) => {
     console.log("radio2 checked", value);
     setValue2(value);
   };
-  const onChange3 = ({ target: { value } }) => {
+  const onChange3 = ({ target: { value } }: RadioChangeEvent) => {
     console.log("radio3 checked", value);
     setValue3(value);
   };
-  const onChange4 = ({ target: { value } }) => {
+  const onChange4 = ({ target: { value } }: RadioChangeEvent) => {
     console.log("radio4 checked", value);
     setValue4(value);
   };
