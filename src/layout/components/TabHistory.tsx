@@ -1,11 +1,14 @@
-import { useEffect, useState, FC, MouseEvent } from "react";
+import { useEffect, useState, FC, MouseEvent, useContext } from "react";
 import { Flex, Tag } from "antd";
-import { routes } from "@services/router";
 import { useLocation, useNavigate } from "react-router-dom";
+import { LayoutContext } from "./LayoutProvider.tsx";
 
 import styles from "../index.module.scss";
 
 const TabHistory: FC = () => {
+  const {
+    layoutData: { menusObj },
+  } = useContext(LayoutContext)!;
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [tagHistory, handleHistory] = useState(["/"]);
@@ -24,34 +27,9 @@ const TabHistory: FC = () => {
     handleHistory(arr);
   };
 
-  const getItems = (children) => {
-    return children.reduce((pre, next) => {
-      const key = next.index
-        ? "/"
-        : next.path?.startsWith("/")
-          ? next.path
-          : `/${next.path}`;
-      pre[key] = global.t(next.title);
-
-      if (next.children) {
-        pre = {
-          ...pre,
-          ...getItems(next.children),
-        };
-      }
-      return pre;
-    }, {});
-  };
-
-  const menuItems = getItems(
-    routes[0].children
-      ? routes[0].children[0].children.filter((item) => item.path !== "*")
-      : [],
-  );
-
   useEffect(() => {
-    if (menuItems[pathname]) setTagHistory(pathname);
-  }, [pathname]);
+    if (menusObj[pathname]) setTagHistory(pathname);
+  }, [pathname, menusObj]);
 
   const onClose = (e: MouseEvent<HTMLElement>, key: string) => {
     e.preventDefault();
@@ -70,7 +48,7 @@ const TabHistory: FC = () => {
             onClose={(e) => onClose(e, tag)}
             onClick={() => navigate(tag)}
           >
-            {menuItems[tag]}
+            <>{menusObj[tag]}</>
           </Tag>
         );
       })}

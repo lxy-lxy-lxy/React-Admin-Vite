@@ -10,5 +10,5 @@ if (["local", "development"].includes(import.meta.env.MODE)) {
 }
 
 createRoot(document.getElementById("root")!).render(
-  <RouterProvider router={router} />,
+  <RouterProvider router={router} future={{ v7_startTransition: true }} />,
 );

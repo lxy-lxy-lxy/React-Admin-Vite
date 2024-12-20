@@ -1,4 +1,5 @@
-import { FC, ReactNode } from "react";
+import { FC } from "react";
+import type { PropsWithChildren } from "react";
 import {
   Row,
   Col,
@@ -16,10 +17,13 @@ import type { ColorPickerProps } from "antd";
 interface Props {
   label: string;
   name: string;
-  children: ReactNode;
 }
 
-const ToolLayout: FC<Props> = ({ label, name, children }) => {
+const ToolLayout: FC<Props & PropsWithChildren> = ({
+  label,
+  name,
+  children,
+}) => {
   return (
     <Row className="d-flex align-items-center mb-2">
       <Col span={12}>{label}</Col>

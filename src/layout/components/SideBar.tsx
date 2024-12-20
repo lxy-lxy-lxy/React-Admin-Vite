@@ -1,61 +1,47 @@
-import { CSSProperties, FC, Fragment, useEffect, useState } from "react";
+import { FC, Fragment, useContext, useEffect, useState } from "react";
+import type {
+  CSSProperties,
+  ReactInstance,
+  MouseEvent,
+  KeyboardEvent,
+} from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import { useGlobalStore, useLoginStore } from "@stores/index";
-import { routes } from "@services/router";
-import logo from "@assets/img/logo/logo.svg";
+import { LayoutContext } from "./LayoutProvider.tsx";
 
+import logo from "@assets/img/logo/logo.svg";
 import styles from "../index.module.scss";
-import type * as React from "react";
 
 const { Sider } = Layout;
 
 interface MenuInfo {
   key: string;
   keyPath: string[];
-  item: React.ReactInstance;
-  domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
+  item: ReactInstance;
+  domEvent: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>;
 }
 
 const SideBar: FC = () => {
+  const {
+    layoutData: { menus },
+  } = useContext(LayoutContext)!;
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { themeConfig, deviceInfo } = useGlobalStore();
   const { collapsed } = themeConfig;
   const { userInfo } = useLoginStore();
-  const [childMenus, setChildMenus] = useState([]);
+  const [childMenus, setChildMenus] = useState<RootLayout.SideMenu[] | []>([]);
   const [parentSelectedKey, setParentSelectedKey] = useState<string[]>([]);
-
-  const getItems = (children) => {
-    return children.map((item) => {
-      return {
-        key: item.index
-          ? "/"
-          : item.path?.startsWith("/")
-            ? item.path
-            : `/${item.path}`,
-        icon: item.icon,
-        label: global.t(item.title),
-        children: item.children ? getItems(item.children) : null,
-      };
-    });
-  };
-
-  const menuItems = getItems(
-    routes[0].children
-      ? routes[0].children[0].children.filter((item) => item.path !== "*")
-      : [],
-  );
 
   useEffect(() => {
     const currentKey = renderOpenKeys()?.[0];
+
     setChildMenus(
-      currentKey
-        ? menuItems.find((item) => item.key === currentKey)?.children
-        : [],
+      menus.find((item) => item.key === currentKey)?.children || [],
     );
     setParentSelectedKey(currentKey ? [currentKey] : []);
-  }, [pathname]);
+  }, [pathname, menus]);
 
   const onMenuClick: (e: MenuInfo, type?: "child" | "parent") => void = (
     { key },
@@ -64,7 +50,7 @@ const SideBar: FC = () => {
     const isChild = type === "child";
     if (isChild) navigate(key);
     if (!isChild) {
-      setChildMenus(menuItems.find((item) => item.key === key)?.children);
+      setChildMenus(menus.find((item) => item.key === key)?.children || []);
       setParentSelectedKey([key]);
     }
   };
@@ -95,8 +81,8 @@ const SideBar: FC = () => {
             selectedKeys={parentSelectedKey}
             items={
               collapsed
-                ? menuItems
-                : menuItems.map((item) => ({ ...item, children: null }))
+                ? menus
+                : menus.map((item) => ({ ...item, children: null }))
             }
             onClick={(e) => onMenuClick(e, collapsed ? "child" : "parent")}
           />

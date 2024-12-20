@@ -1,4 +1,5 @@
 import i18n from "i18next";
+import type { Resource } from "i18next";
 import { initReactI18next } from "react-i18next";
 import { getLocale } from "@utils/utils.ts";
 import resources from "./resources.ts";
@@ -15,7 +16,7 @@ i18n.use(initReactI18next).init({
   fallbackLng: fallbackLanguage,
   defaultNS,
   ns: [defaultNS],
-  resources,
+  resources: resources as Resource,
   interpolation: {
     escapeValue: false,
   },

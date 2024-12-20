@@ -5,7 +5,6 @@ import {
   FC,
   ReactElement,
   ReactNode,
-  PropsWithChildren,
 } from "react";
 import { Col, Form, Row } from "antd";
 import { DownOutlined } from "@ant-design/icons";
@@ -44,7 +43,7 @@ interface Props {
   formName: string;
   childNode: {
     countSpan?: ResponsiveObj | number;
-    element: Element | ReactElement | ReactNode | PropsWithChildren;
+    element: Element | ReactElement | ReactNode;
   }[];
 }
 

@@ -2,7 +2,7 @@ declare namespace GlobalStore {
   interface GlobalState {
     themeConfig: ThemeConfig;
     deviceInfo: DeviceInfo;
-    userConfig: { [key: string]: { [key: string | number]: unknown } };
+    userConfig: { [key: string]: Global.AnyObject };
     setThemeConfig: (params: ThemeConfig) => void;
     clearThemeConfig: () => void;
     setDeviceInfo: (params: DeviceInfo) => void;
@@ -52,5 +52,19 @@ declare namespace LoginInfo {
     userInfo?: User;
     getUserInfo: (params: LoginForm) => userInfo;
     setUserInfo?: (userInfo) => void;
+  }
+}
+
+declare namespace RootLayout {
+  interface LayoutState {
+    menus: SideMenu[];
+    menusObj: Global.AnyObject;
+  }
+
+  interface SideMenu {
+    key: string;
+    icon: JSX.Element;
+    label: string;
+    children?: SideMenu[];
   }
 }

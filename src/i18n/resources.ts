@@ -24,6 +24,6 @@ const localeTransitions = Object.entries(modules).reduce((prev, current) => {
 
 const resources = {
   ...localeTransitions,
-} as const;
+} as object;
 
 export default resources;

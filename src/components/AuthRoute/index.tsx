@@ -1,13 +1,9 @@
-import { FC, PropsWithChildren, ReactElement } from "react";
+import { FC, PropsWithChildren } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import NoAuthPage from "@components/NoAuthPage";
 import { useLoginStore } from "@stores/index";
 
-interface AuthRouteProps {
-  children: PropsWithChildren | ReactElement;
-}
-
-const AuthRoute: FC<AuthRouteProps> = ({ children }) => {
+const AuthRoute: FC<PropsWithChildren> = ({ children }) => {
   const { userInfo } = useLoginStore();
   const { pathname } = useLocation();
   const isAdmin = true;
@@ -18,7 +14,7 @@ const AuthRoute: FC<AuthRouteProps> = ({ children }) => {
   if (!userInfo) {
     return <Navigate to="/login" replace />;
   } else if (isAdmin || obj[pathname]) {
-    return <>{children}</>;
+    return children;
   }
 
   return <NoAuthPage />;
