@@ -33,6 +33,7 @@ const SideBar: FC = () => {
   const { userInfo } = useLoginStore();
   const [childMenus, setChildMenus] = useState<RootLayout.SideMenu[] | []>([]);
   const [parentSelectedKey, setParentSelectedKey] = useState<string[]>([]);
+  const [childKey, setChildKey] = useState<string[]>([]);
 
   useEffect(() => {
     const currentKey = renderOpenKeys()?.[0];
@@ -41,6 +42,9 @@ const SideBar: FC = () => {
       menus.find((item) => item.key === currentKey)?.children || [],
     );
     setParentSelectedKey(currentKey ? [currentKey] : []);
+    if (pathname !== childKey[0]) {
+      setChildKey([pathname]);
+    }
   }, [pathname, menus]);
 
   const onMenuClick: (e: MenuInfo, type?: "child" | "parent") => void = (
@@ -54,6 +58,8 @@ const SideBar: FC = () => {
     if (!isChild) {
       setChildMenus(menus.find((item) => item.key === key)?.children || []);
       setParentSelectedKey([key]);
+    } else {
+      setChildKey([key]);
     }
   };
 
@@ -106,7 +112,7 @@ const SideBar: FC = () => {
           <span>React Admin Vite</span>
         </div>
         <Menu
-          selectedKeys={[pathname]}
+          selectedKeys={childKey}
           defaultOpenKeys={renderOpenKeys()}
           mode="inline"
           items={childMenus}
