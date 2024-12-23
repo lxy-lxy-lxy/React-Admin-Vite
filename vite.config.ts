@@ -10,7 +10,7 @@ const isLocal = process.env.NODE_ENV === "local";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: isLocal ? "/" : "/React-Admin-Vite/",
+  base: process.env.VITE_BASE_NAME,
   envDir: "env",
   define: {
     global: "window",

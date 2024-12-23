@@ -92,19 +92,12 @@ service.interceptors.response.use(
     }
   },
   (error) => {
-    if (error.message.includes("timeout")) {
-      message.error({
-        content: global.t("Timeout Error"),
-        key: "Timeout",
-      });
-      return Promise.reject(error);
-    } else if (!axios.isCancel(error)) {
+    if (!axios.isCancel(error)) {
       try {
-        const status = error?.response?.status || "Network Error";
-        const message = error?.response?.data?.message || "Network Error";
+        const { data } = error.response;
         message.error({
-          content: global.t(message),
-          key: status,
+          content: getErrorStr(data.code),
+          key: data.code,
         });
       } catch {
         message.error({

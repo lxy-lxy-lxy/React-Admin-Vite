@@ -8,38 +8,33 @@ const columns: TableColumnsType = [
   {
     title: global.t("ID"),
     dataIndex: "id",
-    key: "matchID",
+    key: "id",
     fixed: "left",
   },
   {
     title: global.t("名称"),
-    dataIndex: "title",
+    dataIndex: "name",
     key: "name",
   },
   {
     title: "Column 1",
     dataIndex: "account",
-    key: "1",
+    key: "account",
   },
   {
     title: "Column 2",
     dataIndex: "created_at",
-    key: "2",
+    key: "created_at",
   },
   {
     title: "Column 3",
     dataIndex: "updated_at",
-    key: "3",
+    key: "updated_at",
   },
   {
     title: "Column 4",
-    dataIndex: "deptName",
-    key: "4",
-  },
-  {
-    title: "Column 5",
     dataIndex: "phone",
-    key: "5",
+    key: "phone",
   },
   {
     title: "Action",

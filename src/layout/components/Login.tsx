@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { LockOutlined, QrcodeOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { Form, message, Input, Button, Row } from "antd";
@@ -14,19 +14,25 @@ const { Item } = Form;
 const Login = () => {
   const { getUserInfo } = useLoginStore();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     logoutClearStorage();
   }, []);
 
   const onFinish = (e: LoginInfo.LoginForm) => {
+    setLoading(true);
     return getUserInfo({
       ...e,
       password: md5(e.password),
-    }).then(() => {
-      message.success("登录成功🎉🎉🎉");
-      navigate("/", { replace: true });
-    });
+    })
+      .then(() => {
+        message.success("登录成功🎉🎉🎉");
+        navigate("/", { replace: true });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -81,7 +87,7 @@ const Login = () => {
         </Item>
 
         <Item>
-          <Button block type="primary" htmlType="submit">
+          <Button block type="primary" htmlType="submit" loading={loading}>
             {global.t("登录")}
           </Button>
         </Item>

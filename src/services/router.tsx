@@ -142,6 +142,7 @@ const browserRoutes = [
 export { routes };
 
 export default createBrowserRouter(browserRoutes, {
+  basename: import.meta.env.VITE_BASE_NAME,
   future: {
     v7_relativeSplatPath: true,
     v7_fetcherPersist: true,
