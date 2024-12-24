@@ -1,7 +1,7 @@
 import { StateCreator } from "zustand";
 
-export const createOtherStore: StateCreator<
-  DevTool.State,
+export const createUserStore: StateCreator<
+  Setting.State,
   [
     ["zustand/immer", never],
     ["zustand/devtools", never],
@@ -9,7 +9,7 @@ export const createOtherStore: StateCreator<
     ["zustand/persist", unknown],
   ],
   [],
-  OtherTool.State
+  User.State
 > = () => ({
   other: {},
 });

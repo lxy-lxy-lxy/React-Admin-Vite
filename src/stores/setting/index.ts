@@ -6,16 +6,16 @@ import {
   subscribeWithSelector,
   createJSONStorage,
 } from "zustand/middleware";
-import { createTableStore } from "@stores/tool/table";
-import { createOtherStore } from "@stores/tool/other.ts";
+import { createRoleStore } from "@stores/setting/role";
+import { createUserStore } from "@stores/setting/user";
 
-export const useTool = create<
-  DevTool.State,
+export const useSetting = create<
+  Setting.State,
   [
     ["zustand/immer", never],
     ["zustand/devtools", never],
     ["zustand/subscribeWithSelector", never],
-    ["zustand/persist", DevTool.State],
+    ["zustand/persist", Setting.State],
   ]
 >(
   immer(
@@ -23,18 +23,18 @@ export const useTool = create<
       subscribeWithSelector(
         persist(
           (...a) => ({
-            ...createTableStore(...a),
-            ...createOtherStore(...a),
+            ...createRoleStore(...a),
+            ...createUserStore(...a),
           }),
           {
-            name: "toolStore",
+            name: "settingStore",
             storage: createJSONStorage(() => sessionStorage),
           },
         ),
       ),
       {
         enabled: true,
-        name: "toolStore",
+        name: "settingStore",
       },
     ),
   ),

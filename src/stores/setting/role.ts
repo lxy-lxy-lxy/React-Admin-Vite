@@ -1,10 +1,10 @@
 import { get } from "@services/axios";
 import { StateCreator } from "zustand";
 
-const tableData = "/tableTool/getTableList";
+const roleData = "/setting/roleList";
 
-export const createTableStore: StateCreator<
-  DevTool.State,
+export const createRoleStore: StateCreator<
+  Setting.State,
   [
     ["zustand/immer", never],
     ["zustand/devtools", never],
@@ -12,23 +12,23 @@ export const createTableStore: StateCreator<
     ["zustand/persist", unknown],
   ],
   [],
-  TableTool.State
+  Role.State
 > = (set) => ({
-  table: {
+  role: {
     loading: false,
     list: [],
     total: 0,
     searchParams: {},
   },
-  getTableData: async (params: TableTool.Params) => {
-    set((state: TableTool.State) => {
-      state.table.loading = true;
-      state.table.searchParams = params;
+  getRoleData: async (params: Role.Params) => {
+    set((state: Role.State) => {
+      state.role.loading = true;
+      state.role.searchParams = params;
     });
     try {
-      const { total, list } = await get<TableTool.Records>(tableData, params);
+      const { total, list } = await get<Role.Records>(roleData, params);
       set({
-        table: {
+        role: {
           loading: false,
           list,
           total,
@@ -37,8 +37,8 @@ export const createTableStore: StateCreator<
       });
     } catch (e) {
       if (e) {
-        set((state: TableTool.State) => {
-          state.table.loading = false;
+        set((state: Role.State) => {
+          state.role.loading = false;
         });
       }
     }

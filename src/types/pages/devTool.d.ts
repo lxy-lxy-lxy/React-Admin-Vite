@@ -1,9 +1,9 @@
 declare namespace DevTool {
-  type ToolState = TableTool.TableState & OtherTool.OtherState;
+  type State = TableTool.State & OtherTool.State;
 }
 
 declare namespace TableTool {
-  interface TableState {
+  interface State {
     table: {
       loading: boolean;
       list: [];
@@ -25,7 +25,7 @@ declare namespace TableTool {
 }
 
 declare namespace OtherTool {
-  interface OtherState {
+  interface State {
     other: object;
   }
 }

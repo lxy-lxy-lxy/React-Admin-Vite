@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, FC } from "react";
+import { useEffect, useState, useRef, ReactNode } from "react";
 import { Button, Flex, Table, Input } from "antd";
 import type { TableProps } from "antd";
 import { useLocation } from "react-router-dom";
@@ -16,8 +16,9 @@ import styles from "./index.module.scss";
 const { Search } = Input;
 const showTotal = (total: number) => `Total ${total} `;
 
-interface Props extends TableProps {
+interface Props<T> extends TableProps<T> {
   getData: (params: object) => void;
+  dataSource: T[];
   searchParams: { [key: string]: unknown };
   total: number;
   scrollX?: number;
@@ -28,9 +29,10 @@ interface Props extends TableProps {
   allowFullScreen?: boolean;
 }
 
-const ProTable: FC<Props> = (props) => {
+const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
   const {
     getData,
+    dataSource,
     searchParams = {},
     total,
     scrollX = 1500,
@@ -201,9 +203,11 @@ const ProTable: FC<Props> = (props) => {
           x: scrollX,
           y: height || getHeight(),
         }}
+        dataSource={dataSource}
         {...rest}
       />
     </div>
   );
 };
+
 export default ProTable;
