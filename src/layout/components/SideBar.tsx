@@ -53,13 +53,12 @@ const SideBar: FC = () => {
   ) => {
     const isChild = type === "child";
     if (isChild) {
+      setChildKey([key]);
       navigate(key);
     }
     if (!isChild) {
       setChildMenus(menus.find((item) => item.key === key)?.children || []);
       setParentSelectedKey([key]);
-    } else {
-      setChildKey([key]);
     }
   };
 
