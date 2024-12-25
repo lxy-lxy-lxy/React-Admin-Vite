@@ -3,6 +3,13 @@ import { StateCreator } from "zustand";
 
 const roleData = "/setting/roleList";
 
+const initParams = {
+  loading: false,
+  list: [],
+  total: 0,
+  searchParams: {},
+};
+
 export const createRoleStore: StateCreator<
   Setting.State,
   [
@@ -14,12 +21,7 @@ export const createRoleStore: StateCreator<
   [],
   Role.State
 > = (set) => ({
-  role: {
-    loading: false,
-    list: [],
-    total: 0,
-    searchParams: {},
-  },
+  role: initParams,
   getRoleData: async (params: Role.Params) => {
     set((state: Role.State) => {
       state.role.loading = true;
@@ -27,20 +29,24 @@ export const createRoleStore: StateCreator<
     });
     try {
       const { total, list } = await get<Role.Records>(roleData, params);
-      set({
-        role: {
-          loading: false,
-          list,
-          total,
-          searchParams: params,
-        },
+      set((state: Role.State) => {
+        state.role.loading = false;
+        state.role.list = list;
+        state.role.total = total;
       });
     } catch (e) {
       if (e) {
         set((state: Role.State) => {
           state.role.loading = false;
+          state.role.list = [];
+          state.role.total = 0;
         });
       }
     }
+  },
+  resetRoleData: () => {
+    set({
+      role: initParams,
+    });
   },
 });

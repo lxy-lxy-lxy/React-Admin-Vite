@@ -27,18 +27,17 @@ export const createTableStore: StateCreator<
     });
     try {
       const { total, list } = await get<TableTool.Records>(tableData, params);
-      set({
-        table: {
-          loading: false,
-          list,
-          total,
-          searchParams: params,
-        },
+      set((state: TableTool.State) => {
+        state.table.loading = false;
+        state.table.list = list;
+        state.table.total = total;
       });
     } catch (e) {
       if (e) {
         set((state: TableTool.State) => {
           state.table.loading = false;
+          state.table.list = [];
+          state.table.total = 0;
         });
       }
     }

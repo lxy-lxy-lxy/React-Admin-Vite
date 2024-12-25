@@ -9,8 +9,9 @@ interface Props extends ButtonProps {
 
 const Button: FC<Props> = ({ success = false, warning = false, ...rest }) => {
   const { token } = theme.useToken();
+  const { type, danger } = rest;
 
-  let btn = <AntdButton {...rest} />;
+  let btn = <AntdButton ghost={type === "primary" || danger} {...rest} />;
 
   let colorPrimary = null;
 

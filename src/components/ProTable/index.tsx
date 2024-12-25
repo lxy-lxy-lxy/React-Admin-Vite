@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, ReactNode } from "react";
-import { Button, Flex, Table, Input } from "antd";
+import type { ChangeEvent, MouseEvent, KeyboardEvent } from "react";
+import { Flex, Table, Input } from "antd";
 import type { TableProps } from "antd";
 import { useLocation } from "react-router-dom";
 import { useGlobalStore } from "@stores/index";
@@ -10,6 +11,7 @@ import {
   FullscreenExitOutlined,
 } from "@ant-design/icons";
 import { debounce } from "lodash-es";
+import Button from "@components/Button";
 
 import styles from "./index.module.scss";
 
@@ -17,16 +19,26 @@ const { Search } = Input;
 const showTotal = (total: number) => `Total ${total} `;
 
 interface Props<T> extends TableProps<T> {
-  getData: (params: object) => void;
+  getData?: (params: object) => void;
   dataSource: T[];
-  searchParams: { [key: string]: unknown };
-  total: number;
+  searchParams?: { [key: string]: unknown };
+  total?: number;
   scrollX?: number;
-  loading: boolean;
-  allowSearch?: boolean;
-  allowCreate?: boolean;
-  allowExport?: boolean;
+  loading?: boolean;
+  // 简单的关键词搜索，扩展搜索请使用 customTool 或 ProSearch（见DevTool/TableTool），复杂搜索不建议使用
+  onSearch?: (
+    value: string,
+    event?:
+      | ChangeEvent<HTMLInputElement>
+      | MouseEvent<HTMLElement>
+      | KeyboardEvent<HTMLInputElement>,
+    info?: { source?: "clear" | "input" },
+  ) => void;
+  onCreate?: (e: MouseEvent<HTMLElement>) => void;
+  onExport?: (e: MouseEvent<HTMLElement>) => void;
   allowFullScreen?: boolean;
+  // 自定义工具栏，可扩展搜索，复杂搜索不建议使用（见DevTool/TableTool）
+  customTool?: ReactNode;
 }
 
 const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
@@ -37,10 +49,11 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
     total,
     scrollX = 1500,
     loading,
-    allowSearch = false,
-    allowCreate = true,
-    allowExport = false,
+    onSearch = undefined,
+    onCreate = undefined,
+    onExport = undefined,
     allowFullScreen = true,
+    customTool = undefined,
     ...rest
   } = props;
   const tableBoxRef = useRef(null);
@@ -133,29 +146,34 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
         align="center"
         className={`${fullscreen ? styles.fullscreenTool : ""}`}
       >
-        {allowSearch && (
+        {customTool}
+        {onSearch && (
           <Search
             loading={loading}
             className="mb-1 mr-1"
-            placeholder="input search text"
-            onSearch={(e) => {
-              getData({
-                keyword: e,
-              });
-            }}
+            placeholder={global.t("请输入关键词")}
+            onSearch={onSearch}
             style={{
               width: 200,
             }}
           />
         )}
-        {allowCreate && (
-          <Button type="primary" className="mb-1 mr-1">
-            <PlusOutlined /> {global.t("添加")}
+        {onCreate && (
+          <Button
+            type="primary"
+            className="mb-1 mr-1"
+            onClick={(e) => onCreate(e)}
+          >
+            <>
+              <PlusOutlined /> {global.t("添加")}
+            </>
           </Button>
         )}
-        {allowExport && (
-          <Button type="primary" className="mb-1 mr-1">
-            <ExportOutlined /> {global.t("导出")}
+        {onExport && (
+          <Button type="primary" className="mb-1 mr-1" onClick={onExport}>
+            <>
+              <ExportOutlined /> {global.t("导出")}
+            </>
           </Button>
         )}
         {allowFullScreen && (

@@ -77,11 +77,11 @@ const BasicLayout: FC = () => {
             </Header>
             <Content className={styles.layout}>
               <Card id="contentLayout" style={{ minHeight: "100%" }}>
-                <AuthRoute>
-                  <Suspense fallback={<Loading />}>
+                <Suspense fallback={<Loading />}>
+                  <AuthRoute>
                     <Outlet />
-                  </Suspense>
-                </AuthRoute>
+                  </AuthRoute>
+                </Suspense>
               </Card>
             </Content>
             <Footer id="footerLayout" style={{ textAlign: "center" }}>
