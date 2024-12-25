@@ -21,6 +21,7 @@ declare namespace GlobalStore {
     menuExtend?: 0 | 1;
     tagStatus?: 0 | 1;
     tagStyle?: "card" | "demo";
+    routeAn?: 0 | 1;
   }
 
   interface DeviceInfo {

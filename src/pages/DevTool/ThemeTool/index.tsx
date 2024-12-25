@@ -97,6 +97,9 @@ const ThemeTool = () => {
           <Select.Option value="demo">{global.t("矩形")}</Select.Option>
         </Select>
       </ToolLayout>
+      <ToolLayout name="routeAn" label={global.t("路由切换动画")}>
+        <Switch />
+      </ToolLayout>
       <div className="text-left">
         <Button size="large" type="primary" htmlType="submit">
           {global.t("保存")}

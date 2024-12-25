@@ -1,4 +1,4 @@
-import { FC, Fragment, useLayoutEffect, useRef } from "react";
+import { FC, useLayoutEffect, useRef } from "react";
 import ProTable from "@components/ProTable";
 import { message, Space, Tag, Typography } from "antd";
 import type { TableColumnsType } from "antd";
@@ -6,8 +6,9 @@ import { useSetting } from "@stores/setting";
 import Button from "@components/Button";
 import RoleComp from "./components/RoleComp.tsx";
 import { statusObj } from "@utils/enum.ts";
+import Page from "@layout/components/Page.tsx";
 
-const { Paragraph } = Typography;
+const { Text } = Typography;
 
 const RoleManage: FC = () => {
   const {
@@ -48,7 +49,7 @@ const RoleManage: FC = () => {
       title: global.t("备注"),
       dataIndex: "remark",
       render: (_, { remark }) => (
-        <Paragraph ellipsis={{ rows: 2, expandable: true }}>{remark}</Paragraph>
+        <Text ellipsis={{ tooltip: remark }}>{remark}</Text>
       ),
     },
     {
@@ -91,7 +92,7 @@ const RoleManage: FC = () => {
   };
 
   return (
-    <Fragment>
+    <Page>
       <ProTable<Role.DataType>
         getData={getData}
         searchParams={{ ...searchParams }}
@@ -110,7 +111,7 @@ const RoleManage: FC = () => {
         onCreate={() => onOpen()}
       />
       <RoleComp ref={compRef} />
-    </Fragment>
+    </Page>
   );
 };
 export default RoleManage;

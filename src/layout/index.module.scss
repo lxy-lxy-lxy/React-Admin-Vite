@@ -177,6 +177,7 @@ $layoutContentHeight: calc(100vh - $height - 4.8rem - 3rem);
   /* 在Content高度的基础上，再减去Content与基础Card的padding */
   height: calc($layoutContentHeight - 6.5rem);
   max-height: calc($layoutContentHeight - 6.5rem);
+  overflow-y: hidden;
 }
 
 .fullHeight {

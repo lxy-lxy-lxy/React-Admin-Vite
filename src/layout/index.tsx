@@ -1,31 +1,18 @@
-import { CSSProperties, StrictMode, Suspense, useEffect, FC } from "react";
+import { CSSProperties, StrictMode, useEffect, FC } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { Card, Layout, Spin, theme } from "antd";
+import { Layout, theme } from "antd";
 import HeaderComp from "./components/Header";
 import { useLoginStore } from "@stores/index";
 import AuthRoute from "@components/AuthRoute";
 import SideBar from "./components/SideBar";
 import { getLocale } from "@utils/utils";
 import TabHistory from "./components/TabHistory";
-import NProgress from "nprogress";
 import LayoutProvider from "./components/LayoutProvider.tsx";
 
-import "nprogress/nprogress.css";
 import "antd/dist/reset.css";
 import styles from "./index.module.scss";
 
 const { Header, Content, Footer } = Layout;
-
-const Loading = () => {
-  useEffect(() => {
-    NProgress.start();
-    return () => {
-      NProgress.done();
-    };
-  }, []);
-
-  return <Spin size="large" className="content_spin" />;
-};
 
 const BasicLayout: FC = () => {
   const { userInfo } = useLoginStore();
@@ -76,13 +63,9 @@ const BasicLayout: FC = () => {
               <TabHistory />
             </Header>
             <Content className={styles.layout}>
-              <Card id="contentLayout" style={{ minHeight: "100%" }}>
-                <Suspense fallback={<Loading />}>
-                  <AuthRoute>
-                    <Outlet />
-                  </AuthRoute>
-                </Suspense>
-              </Card>
+              <AuthRoute>
+                <Outlet />
+              </AuthRoute>
             </Content>
             <Footer id="footerLayout" style={{ textAlign: "center" }}>
               Copyright © 2024 React Admin Vite

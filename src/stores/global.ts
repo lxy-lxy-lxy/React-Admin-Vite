@@ -10,6 +10,7 @@ const initThemeConfig: GlobalStore.ThemeConfig = {
   menuExtend: 0,
   tagStatus: 1,
   tagStyle: "card",
+  routeAn: 1,
 };
 
 const useGlobalStore = create<

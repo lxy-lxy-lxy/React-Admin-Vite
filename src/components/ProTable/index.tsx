@@ -61,7 +61,7 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
   const { pathname } = useLocation();
   const { userConfig, setUserConfig } = useGlobalStore();
   const [fullscreen, setFullscreen] = useState(false);
-  const [height, setHeight] = useState<number | undefined>(undefined);
+  const [height, setHeight] = useState<number | "max-content">("max-content");
 
   useEffect(() => {
     if (getData) {
@@ -107,7 +107,7 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
 
   const onResize = debounce((mode?: boolean) => {
     setHeight(getHeight(mode));
-  }, 50);
+  }, 188);
 
   const getHeight = (mode?: boolean) => {
     if (tableBoxRef.current) {
@@ -132,7 +132,7 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
         );
       }
     }
-    return undefined;
+    return "max-content";
   };
 
   return (
@@ -219,7 +219,7 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
         }}
         scroll={{
           x: scrollX,
-          y: height || getHeight(),
+          y: height,
         }}
         dataSource={dataSource}
         {...rest}

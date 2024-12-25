@@ -1,7 +1,18 @@
 $width: 1rem;
 
 .proTable {
+  :global {
+    .ant-table-body {
+      overflow-y: scroll !important;
 
+      //滚动条的轨道（里面装有thumb）滚动槽
+      &::-webkit-scrollbar-track {
+        width: 1px;
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+    }
+  }
 }
 
 .fullscreen {
