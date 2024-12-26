@@ -24,6 +24,18 @@ const onMenuClick: MenuProps["onClick"] = (e) => {
 const ButtonTool = () => {
   return (
     <Space wrap>
+      <Button type="primary" ghost={false}>
+        Primary
+      </Button>
+      <Button success type="primary" ghost={false}>
+        Success
+      </Button>
+      <Button warning type="primary" ghost={false}>
+        Warning
+      </Button>
+      <Button danger type="primary" ghost={false}>
+        Danger
+      </Button>
       <Button type="primary">Primary</Button>
       <Button success type="primary">
         Success

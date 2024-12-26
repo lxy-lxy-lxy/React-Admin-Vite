@@ -1,9 +1,9 @@
 .my-node-enter {
-    opacity: 0.5;
+    opacity: 0.4;
 }
 .my-node-enter-active {
     opacity: 1;
-    transition: opacity 100ms;
+    transition: opacity 200ms;
 }
 
 .my-node-exit {

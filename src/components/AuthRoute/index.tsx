@@ -38,7 +38,7 @@ const AuthRoute: FC<PropsWithChildren> = ({ children }) => {
       <SwitchTransition>
         <CSSTransition
           key={pathname}
-          timeout={400}
+          timeout={200}
           classNames={routeAn ? "my-node" : ""}
           unmountOnExit
         >

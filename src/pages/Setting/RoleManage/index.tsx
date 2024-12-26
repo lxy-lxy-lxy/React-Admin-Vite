@@ -1,4 +1,4 @@
-import { FC, useLayoutEffect, useRef } from "react";
+import { FC, useRef } from "react";
 import ProTable from "@components/ProTable";
 import { message, Space, Tag, Typography } from "antd";
 import type { TableColumnsType } from "antd";
@@ -14,15 +14,8 @@ const RoleManage: FC = () => {
   const {
     role: { list, total, loading, searchParams },
     getRoleData,
-    resetRoleData,
   } = useSetting();
   const compRef = useRef<Role.RoleCompRef>(null);
-
-  useLayoutEffect(() => {
-    return () => {
-      resetRoleData();
-    };
-  }, []);
 
   const columns: TableColumnsType<Role.DataType> = [
     {

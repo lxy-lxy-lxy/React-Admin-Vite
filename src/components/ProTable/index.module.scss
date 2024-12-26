@@ -7,8 +7,7 @@ $width: 1rem;
 
       //滚动条的轨道（里面装有thumb）滚动槽
       &::-webkit-scrollbar-track {
-        width: 1px;
-        background: rgba(255, 255, 255, 0.8);
+        background: var(--ant-color-bg-base);
       }
 
     }

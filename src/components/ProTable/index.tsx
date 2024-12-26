@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, ReactNode } from "react";
+import { useLayoutEffect, useState, useRef, ReactNode } from "react";
 import type { ChangeEvent, MouseEvent, KeyboardEvent } from "react";
 import { Flex, Table, Input } from "antd";
 import type { TableProps } from "antd";
@@ -57,13 +57,12 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
     ...rest
   } = props;
   const tableBoxRef = useRef(null);
-  const tableToolRef = useRef(null);
   const { pathname } = useLocation();
   const { userConfig, setUserConfig } = useGlobalStore();
   const [fullscreen, setFullscreen] = useState(false);
   const [height, setHeight] = useState<number | "max-content">("max-content");
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (getData) {
       getData(
         searchParams.pageSize
@@ -112,15 +111,15 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
   const getHeight = (mode?: boolean) => {
     if (tableBoxRef.current) {
       const content = document.getElementById("contentLayout");
-      const footer = document.getElementById("footerLayout");
-      const head = (tableBoxRef.current as Document).getElementsByClassName(
-        "ant-table-thead",
-      )[0];
-      const pagination = (
-        tableBoxRef.current as Document
-      ).getElementsByClassName("ant-pagination")[0] as HTMLDivElement;
-
       if (content && content.contains(tableBoxRef.current)) {
+        const footer = document.getElementById("footerLayout");
+        const head = (tableBoxRef.current as Document).getElementsByClassName(
+          "ant-table-thead",
+        )[0];
+        const pagination = (
+          tableBoxRef.current as Document
+        ).getElementsByClassName("ant-pagination")[0] as HTMLDivElement;
+
         const headRect = head.getBoundingClientRect();
         return (
           window.innerHeight -
@@ -141,7 +140,6 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
       className={`${styles.proTable} ${fullscreen ? styles.fullscreen : ""}`}
     >
       <Flex
-        ref={tableToolRef}
         justify="flex-end"
         align="center"
         className={`${fullscreen ? styles.fullscreenTool : ""}`}
@@ -211,7 +209,7 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
             userConfig.pathname?.pageSize ||
             30) as number,
           pageSizeOptions: [10, 30, 50, 100],
-          // hideOnSinglePage: true,
+          hideOnSinglePage: true,
           showSizeChanger: true,
           onShowSizeChange,
           onChange,

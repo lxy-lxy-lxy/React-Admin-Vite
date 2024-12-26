@@ -112,7 +112,7 @@ const RoleComp: (
                 {Object.keys(statusObj)
                   .reverse()
                   .map((item) => (
-                    <Radio value={parseInt(item)}>
+                    <Radio value={parseInt(item)} key={item}>
                       {statusObj[item].label}
                     </Radio>
                   ))}
