@@ -209,7 +209,7 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
             userConfig.pathname?.pageSize ||
             30) as number,
           pageSizeOptions: [10, 30, 50, 100],
-          hideOnSinglePage: true,
+          // hideOnSinglePage: true,
           showSizeChanger: true,
           onShowSizeChange,
           onChange,

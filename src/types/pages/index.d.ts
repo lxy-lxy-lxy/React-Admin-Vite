@@ -2,10 +2,12 @@ declare namespace GlobalStore {
   interface GlobalState {
     themeConfig: ThemeConfig;
     deviceInfo: DeviceInfo;
+    menuInfo: MenuInfo[] | [];
     userConfig: { [key: string]: Global.AnyObject };
     setThemeConfig: (params: ThemeConfig) => void;
     clearThemeConfig: () => void;
     setDeviceInfo: (params: DeviceInfo) => void;
+    setMenuInfo: (params: MenuInfo[]) => void;
     setUserConfig: (
       key: string,
       value: {
@@ -26,6 +28,15 @@ declare namespace GlobalStore {
 
   interface DeviceInfo {
     isPhone: boolean;
+  }
+
+  interface MenuInfo {
+    id: number;
+    parentId: number;
+    path: string;
+    icon: string;
+    title: string;
+    children: MenuInfo[] | [];
   }
 }
 

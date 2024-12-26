@@ -29,6 +29,7 @@ const useGlobalStore = create<
           (set) => ({
             themeConfig: { ...initThemeConfig },
             deviceInfo: { isPhone: isMobile() },
+            menuInfo: [],
             userConfig: {},
             setThemeConfig: (params) =>
               set((state) => {
@@ -44,6 +45,10 @@ const useGlobalStore = create<
                   ...state.deviceInfo,
                   ...params,
                 };
+              }),
+            setMenuInfo: (params) =>
+              set((state) => {
+                state.menuInfo = params;
               }),
             setUserConfig: (key, value) =>
               set((state) => {

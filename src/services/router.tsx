@@ -28,17 +28,23 @@ const RadioTool = lazy(() => import("@pages/DevTool/DataTool/RadioTool"));
 const CheckTool = lazy(() => import("@pages/DevTool/DataTool/CheckTool"));
 const InputTool = lazy(() => import("@pages/DevTool/DataTool/InputTool"));
 
+const showDemo = ["local", "development"].includes(
+  import.meta.env.VITE_NODE_ENV,
+);
+
 const routes = [
   {
     errorElement: <ErrorPage />,
     children: [
       {
+        key: 10,
         title: "工作台",
         icon: <DashboardOutlined />,
         path: "",
         children: [{ index: true, title: "首页", element: <Dashboard /> }],
       },
       {
+        key: 20,
         path: "setting",
         title: "配置",
         icon: <UserOutlined />,
@@ -60,64 +66,68 @@ const routes = [
           },
         ],
       },
-      {
-        path: "devTool",
-        title: "组件",
-        icon: <ToolOutlined />,
-        children: [
-          {
-            path: "/devTool/TableTool",
-            title: "表格",
-            element: <TableTool />,
-          },
-          {
-            path: "/devTool/EditorTool",
-            title: "富文本",
-            element: <EditorTool />,
-          },
-          {
-            path: "/devTool/ThemeTool",
-            title: "主题",
-            element: <ThemeTool />,
-          },
-          {
-            path: "/devTool/ButtonTool",
-            title: "按钮",
-            element: <ButtonTool />,
-          },
-          {
-            path: "/devTool/DataTool",
-            title: "数据录入",
-            children: [
-              {
-                path: "/devTool/DataTool/FormTool",
-                title: "表单",
-                element: <FormTool />,
-              },
-              {
-                path: "/devTool/DataTool/DateTool",
-                title: "日期选择器",
-                element: <DateTool />,
-              },
-              {
-                path: "/devTool/DataTool/RadioTool",
-                title: "单选框",
-                element: <RadioTool />,
-              },
-              {
-                path: "/devTool/DataTool/CheckTool",
-                title: "多选框",
-                element: <CheckTool />,
-              },
-              {
-                path: "/devTool/DataTool/InputTool",
-                title: "输入框",
-                element: <InputTool />,
-              },
-            ],
-          },
-        ],
-      },
+      ...(showDemo
+        ? [
+            {
+              path: "devTool",
+              title: "组件",
+              icon: <ToolOutlined />,
+              children: [
+                {
+                  path: "/devTool/TableTool",
+                  title: "表格",
+                  element: <TableTool />,
+                },
+                {
+                  path: "/devTool/EditorTool",
+                  title: "富文本",
+                  element: <EditorTool />,
+                },
+                {
+                  path: "/devTool/ThemeTool",
+                  title: "主题",
+                  element: <ThemeTool />,
+                },
+                {
+                  path: "/devTool/ButtonTool",
+                  title: "按钮",
+                  element: <ButtonTool />,
+                },
+                {
+                  path: "/devTool/DataTool",
+                  title: "数据录入",
+                  children: [
+                    {
+                      path: "/devTool/DataTool/FormTool",
+                      title: "表单",
+                      element: <FormTool />,
+                    },
+                    {
+                      path: "/devTool/DataTool/DateTool",
+                      title: "日期选择器",
+                      element: <DateTool />,
+                    },
+                    {
+                      path: "/devTool/DataTool/RadioTool",
+                      title: "单选框",
+                      element: <RadioTool />,
+                    },
+                    {
+                      path: "/devTool/DataTool/CheckTool",
+                      title: "多选框",
+                      element: <CheckTool />,
+                    },
+                    {
+                      path: "/devTool/DataTool/InputTool",
+                      title: "输入框",
+                      element: <InputTool />,
+                    },
+                  ],
+                },
+              ],
+            },
+          ]
+        : []),
       {
         path: "*",
         element: <Navigate to="/" replace={true} />,

@@ -15,7 +15,8 @@ dayjs.locale("zh-cn");
 const BasicLayout = lazy(() => import("./layout"));
 
 const App = () => {
-  const { themeConfig, setDeviceInfo, setThemeConfig } = useGlobalStore();
+  const { themeConfig, menuInfo, setDeviceInfo, setThemeConfig } =
+    useGlobalStore();
   const { t } = useTranslation();
 
   const handleResize = () => {
@@ -38,6 +39,8 @@ const App = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {}, [menuInfo]);
 
   return (
     <ConfigProvider
