@@ -1,14 +1,14 @@
 import { useEffect, useState, FC, MouseEvent, useContext } from "react";
 import { Flex, Tag } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
-import { LayoutContext } from "./LayoutProvider.tsx";
+import { RouteContext } from "../../main.tsx";
 
 import styles from "../index.module.scss";
 
 const TabHistory: FC = () => {
   const {
-    layoutData: { menusObj },
-  } = useContext(LayoutContext)!;
+    routeData: { menusObj },
+  } = useContext(RouteContext)!;
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [tagHistory, handleHistory] = useState(["/"]);

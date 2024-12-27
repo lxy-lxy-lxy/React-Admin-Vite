@@ -43,7 +43,7 @@ service.interceptors.request.use(
   // 请求拦截
   (config) => {
     const token = localStorage.getItem("token");
-    if (token) config.headers["X-Token"] = token;
+    if (token) config.headers["Authorization"] = `Bearer ${token}`;
     config.headers["lang"] = localStorage.getItem("local");
 
     let reqData = "";
@@ -100,6 +100,7 @@ service.interceptors.response.use(
           key: data.code,
         });
       } catch {
+        console.error(error);
         message.error({
           content: global.t("Network Error"),
           key: "Network Error",

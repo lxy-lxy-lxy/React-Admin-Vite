@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
 import { isMobile } from "@utils/utils";
+import { get } from "@services/axios.ts";
 
 const initThemeConfig: GlobalStore.ThemeConfig = {
   mode: "light",
@@ -12,6 +13,8 @@ const initThemeConfig: GlobalStore.ThemeConfig = {
   tagStyle: "card",
   routeAn: 1,
 };
+
+const routesApi = "/user/routes";
 
 const useGlobalStore = create<
   GlobalStore.GlobalState,
@@ -26,11 +29,8 @@ const useGlobalStore = create<
     devtools(
       subscribeWithSelector(
         persist(
-          (set) => ({
+          (set, getState) => ({
             themeConfig: { ...initThemeConfig },
-            deviceInfo: { isPhone: isMobile() },
-            menuInfo: [],
-            userConfig: {},
             setThemeConfig: (params) =>
               set((state) => {
                 state.themeConfig = { ...state.themeConfig, ...params };
@@ -39,6 +39,7 @@ const useGlobalStore = create<
               set((state) => {
                 state.themeConfig = { ...initThemeConfig };
               }),
+            deviceInfo: { isPhone: isMobile() },
             setDeviceInfo: (params) =>
               set((state) => {
                 state.deviceInfo = {
@@ -46,10 +47,18 @@ const useGlobalStore = create<
                   ...params,
                 };
               }),
-            setMenuInfo: (params) =>
-              set((state) => {
-                state.menuInfo = params;
-              }),
+            menuInfo: [],
+            getMenuInfo: async () => {
+              const data = await get<GlobalStore.MenuInfo[]>(routesApi);
+              if (
+                JSON.stringify(getState().menuInfo) !== JSON.stringify(data)
+              ) {
+                set((state) => {
+                  state.menuInfo = data;
+                });
+              }
+            },
+            userConfig: {},
             setUserConfig: (key, value) =>
               set((state) => {
                 if (state.userConfig[key]) {

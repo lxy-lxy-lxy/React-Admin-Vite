@@ -1,13 +1,13 @@
 declare namespace GlobalStore {
   interface GlobalState {
     themeConfig: ThemeConfig;
-    deviceInfo: DeviceInfo;
-    menuInfo: MenuInfo[] | [];
-    userConfig: { [key: string]: Global.AnyObject };
     setThemeConfig: (params: ThemeConfig) => void;
     clearThemeConfig: () => void;
+    deviceInfo: DeviceInfo;
     setDeviceInfo: (params: DeviceInfo) => void;
-    setMenuInfo: (params: MenuInfo[]) => void;
+    menuInfo: MenuInfo[] | [];
+    getMenuInfo: () => void;
+    userConfig: { [key: string]: Global.AnyObject };
     setUserConfig: (
       key: string,
       value: {
@@ -32,11 +32,12 @@ declare namespace GlobalStore {
 
   interface MenuInfo {
     id: number;
-    parentId: number;
+    pId: number;
     path: string;
+    route: string;
     icon: string;
     title: string;
-    children: MenuInfo[] | [];
+    children?: MenuInfo[] | [];
   }
 }
 
@@ -68,14 +69,15 @@ declare namespace LoginInfo {
 }
 
 declare namespace RootLayout {
-  interface LayoutState {
+  interface RouteState {
     menus: SideMenu[];
     menusObj: Global.AnyObject;
   }
 
   interface SideMenu {
+    id: number;
     key: string;
-    icon: JSX.Element;
+    icon?: JSX.Element;
     label: string;
     children?: SideMenu[];
   }

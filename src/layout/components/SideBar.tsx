@@ -8,7 +8,7 @@ import type {
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import { useGlobalStore, useLoginStore } from "@stores/index";
-import { LayoutContext } from "./LayoutProvider.tsx";
+import { RouteContext } from "../../main.tsx";
 
 import logo from "@assets/img/logo/logo.svg";
 import styles from "../index.module.scss";
@@ -24,8 +24,8 @@ interface MenuInfo {
 
 const SideBar: FC = () => {
   const {
-    layoutData: { menus },
-  } = useContext(LayoutContext)!;
+    routeData: { menus },
+  } = useContext(RouteContext)!;
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { themeConfig, deviceInfo } = useGlobalStore();
@@ -33,7 +33,6 @@ const SideBar: FC = () => {
   const { userInfo } = useLoginStore();
   const [childMenus, setChildMenus] = useState<RootLayout.SideMenu[] | []>([]);
   const [parentSelectedKey, setParentSelectedKey] = useState<string[]>([]);
-  const [childKey, setChildKey] = useState<string[]>([]);
 
   useEffect(() => {
     const currentKey = renderOpenKeys()?.[0];
@@ -42,9 +41,6 @@ const SideBar: FC = () => {
       menus.find((item) => item.key === currentKey)?.children || [],
     );
     setParentSelectedKey(currentKey ? [currentKey] : []);
-    if (pathname !== childKey[0]) {
-      setChildKey([pathname]);
-    }
   }, [pathname, menus]);
 
   const onMenuClick: (e: MenuInfo, type?: "child" | "parent") => void = (
@@ -53,7 +49,7 @@ const SideBar: FC = () => {
   ) => {
     const isChild = type === "child";
     if (isChild) {
-      setChildKey([key]);
+      console.log(key);
       navigate(key);
     }
     if (!isChild) {
@@ -111,7 +107,7 @@ const SideBar: FC = () => {
           <span>React Admin Vite</span>
         </div>
         <Menu
-          selectedKeys={childKey}
+          selectedKeys={[pathname]}
           defaultOpenKeys={renderOpenKeys()}
           mode="inline"
           items={childMenus}

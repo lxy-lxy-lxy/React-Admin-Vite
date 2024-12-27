@@ -7,7 +7,6 @@ import AuthRoute from "@components/AuthRoute";
 import SideBar from "./components/SideBar";
 import { getLocale } from "@utils/utils";
 import TabHistory from "./components/TabHistory";
-import LayoutProvider from "./components/LayoutProvider.tsx";
 
 import "antd/dist/reset.css";
 import styles from "./index.module.scss";
@@ -46,32 +45,30 @@ const BasicLayout: FC = () => {
           } as CSSProperties
         }
       >
-        <LayoutProvider>
-          <SideBar />
-          <Layout>
-            <Header style={{ padding: "0 1rem", background: colorBgContainer }}>
-              <HeaderComp />
-            </Header>
-            <Header
-              style={{
-                padding: "0 1rem",
-                height: "4.8rem",
-                borderTop: `0.1rem solid ${colorBorderSecondary}`,
-                background: colorBgContainer,
-              }}
-            >
-              <TabHistory />
-            </Header>
-            <Content className={styles.layout}>
-              <AuthRoute>
-                <Outlet />
-              </AuthRoute>
-            </Content>
-            <Footer id="footerLayout" style={{ textAlign: "center" }}>
-              Copyright © 2024 React Admin Vite
-            </Footer>
-          </Layout>
-        </LayoutProvider>
+        <SideBar />
+        <Layout>
+          <Header style={{ padding: "0 1rem", background: colorBgContainer }}>
+            <HeaderComp />
+          </Header>
+          <Header
+            style={{
+              padding: "0 1rem",
+              height: "4.8rem",
+              borderTop: `0.1rem solid ${colorBorderSecondary}`,
+              background: colorBgContainer,
+            }}
+          >
+            <TabHistory />
+          </Header>
+          <Content className={styles.layout}>
+            <AuthRoute>
+              <Outlet />
+            </AuthRoute>
+          </Content>
+          <Footer id="footerLayout" style={{ textAlign: "center" }}>
+            Copyright © 2024 React Admin Vite
+          </Footer>
+        </Layout>
       </Layout>
     </StrictMode>
   );
