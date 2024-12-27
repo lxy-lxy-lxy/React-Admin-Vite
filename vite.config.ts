@@ -76,6 +76,18 @@ export default defineConfig({
           antd: "antd",
         }),
       ],
+      output: {
+        chunkFileNames: "assets/js/[name]-[hash].js",
+        entryFileNames: "assets/js/[name]-[hash].js",
+        assetFileNames: "assets/[ext]/[name]-[hash].[ext]",
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            if (id.includes("draft")) {
+              return "draft";
+            }
+          }
+        },
+      },
     },
   },
 });

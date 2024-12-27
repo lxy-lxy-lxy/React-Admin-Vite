@@ -1,12 +1,27 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import {
+  FC,
+  Fragment,
+  PropsWithChildren,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { createPortal } from "react-dom";
 
-const CacheComp = ({
+interface Props {
+  active: boolean;
+  cache: boolean;
+  name: string;
+  renderDiv: RefObject<HTMLDivElement>;
+}
+
+const CacheComp: FC<Props & PropsWithChildren> = ({
   active,
   children,
   name,
   renderDiv,
-}: CacheComponentProps) => {
+}) => {
   const [targetElement] = useState(() => document.createElement("div"));
   const activatedRef = useRef(false);
   activatedRef.current = activatedRef.current || active;

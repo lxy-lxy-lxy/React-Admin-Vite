@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import CacheComponent from "@components/KeepAlive/CacheComp";
+import CacheComp from "@components/KeepAlive/CacheComp";
 import KeepAliveProvider from "@components/KeepAlive/KeepAliveProvider";
 
 function isNil(value: unknown) {
@@ -126,7 +126,7 @@ const KeepAlive = memo(function KeepAlive(props: Props) {
       <div ref={containerRef} className="keep-alive" />
       <KeepAliveProvider initialActiveKey={activeKey}>
         {cacheReactNodes?.map(({ name, cache, ele }) => (
-          <CacheComponent
+          <CacheComp
             active={name === activeKey}
             renderDiv={containerRef}
             cache={cache}
@@ -134,7 +134,7 @@ const KeepAlive = memo(function KeepAlive(props: Props) {
             key={name}
           >
             {ele}
-          </CacheComponent>
+          </CacheComp>
         ))}
       </KeepAliveProvider>
     </Fragment>

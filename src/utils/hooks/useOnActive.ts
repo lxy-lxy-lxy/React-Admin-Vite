@@ -3,7 +3,7 @@ import { useKeepAliveContext } from "@utils/hooks/useKeepAliveContext.ts";
 
 export const useOnActive = (cb: () => unknown, skipMount = true) => {
   const domRef = useRef<HTMLDivElement>(null);
-  const { activeName } = useKeepAliveContext();
+  const { activeKey } = useKeepAliveContext();
   const isMount = useRef(false);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ export const useOnActive = (cb: () => unknown, skipMount = true) => {
     const parent = domRef.current?.parentElement;
     const name = parent?.id;
     if (parent && name) {
-      if (activeName === name) {
+      if (activeKey === name) {
         if (skipMount) {
           if (isMount.current) destroyCb = cb();
         } else {
@@ -25,7 +25,7 @@ export const useOnActive = (cb: () => unknown, skipMount = true) => {
         };
       }
     }
-  }, [activeName]);
+  }, [activeKey]);
 
   return domRef;
 };
