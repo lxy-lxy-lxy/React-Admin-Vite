@@ -22,7 +22,7 @@ export const useLoading = (loadingKey?: "") => {
     } else {
       const newTimer = setTimeout(() => {
         setLoading(curLoading);
-      }, 200);
+      }, 150);
       setTimer(newTimer);
     }
   }, [curLoading]);

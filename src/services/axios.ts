@@ -46,9 +46,9 @@ const getRequest = (
   if (config) {
     let reqData = "";
     if (config.method === "get") {
-      reqData = `${config.url}${config.method}${JSON.stringify(config.params)}`;
+      reqData = `${config.url}${config.method}${config.params ? JSON.stringify(config.params) : ""}`;
     } else {
-      reqData = config.url! + config.method + JSON.stringify(config.data);
+      reqData = `${config.url}${config.method}${typeof config.data === "string" ? config.data : JSON.stringify(config.data)}`;
     }
 
     setLoading({
