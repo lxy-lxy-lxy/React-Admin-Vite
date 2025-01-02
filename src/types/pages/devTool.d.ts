@@ -5,7 +5,6 @@ declare namespace DevTool {
 declare namespace TableTool {
   interface State {
     table: {
-      loading: boolean;
       list: [];
       total: number;
       searchParams: Params;

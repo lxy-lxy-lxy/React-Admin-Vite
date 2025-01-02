@@ -8,8 +8,8 @@ const initThemeConfig: GlobalStore.ThemeConfig = {
   mode: "light",
   collapsed: false,
   colorPrimary: "#1677ff",
-  menuExtend: 0,
-  tagStatus: 1,
+  menuExtend: false,
+  tagStatus: false,
   tagStyle: "card",
   routeAn: 1,
 };

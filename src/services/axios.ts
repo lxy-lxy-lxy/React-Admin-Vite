@@ -1,5 +1,5 @@
-import axios, { Canceler } from "axios"; // axios引用
-import { getErrorStr } from "@utils/utils";
+import axios, { Canceler, InternalAxiosRequestConfig } from "axios"; // axios引用
+import { getErrorStr, setLoading } from "@utils/utils";
 import { message } from "antd";
 
 const env = import.meta.env;
@@ -39,6 +39,27 @@ export const getConfirmation = (_: string, callback = () => {}) => {
   callback();
 };
 
+const getRequest = (
+  config: InternalAxiosRequestConfig<unknown>,
+  type: "request" | "response",
+) => {
+  if (config) {
+    let reqData = "";
+    if (config.method === "get") {
+      reqData = `${config.url}${config.method}${JSON.stringify(config.params)}`;
+    } else {
+      reqData = config.url! + config.method + JSON.stringify(config.data);
+    }
+
+    setLoading({
+      key: reqData,
+      loading: type === "request",
+    });
+    return reqData;
+  }
+  return "";
+};
+
 service.interceptors.request.use(
   // 请求拦截
   (config) => {
@@ -46,14 +67,7 @@ service.interceptors.request.use(
     if (token) config.headers["Authorization"] = `Bearer ${token}`;
     config.headers["lang"] = localStorage.getItem("local");
 
-    let reqData = "";
-    // 处理如url相同请求参数不同时上一个请求被屏蔽的情况
-    if (config.method === "get") {
-      // 组件内用的参数refresh，不需要传递,默认去除
-      reqData = `${config.url}${config.method}${config.params?.isUnique === false ? JSON.stringify(config.params) : ""}`;
-    } else {
-      reqData = config.url! + config.method + JSON.stringify(config.data);
-    }
+    const reqData = getRequest(config, "request");
     // 如果玩家连续点击某个按钮会发起多个相同的请求，可以在这里进行拦截请求并取消上一个重复的请求
     removePending(reqData, true);
     // 设置请求的 cancelToken（设置后就能中途控制取消了）
@@ -71,6 +85,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   // 回复拦截，主要针对部分回掉数据状态码进行处理
   (response) => {
+    getRequest(response.config, "response");
     const { data, status } = response;
     if (status === 200) {
       const { code } = data;
@@ -92,6 +107,7 @@ service.interceptors.response.use(
     }
   },
   (error) => {
+    getRequest(error.config, "response");
     if (!axios.isCancel(error)) {
       try {
         const { data } = error.response;

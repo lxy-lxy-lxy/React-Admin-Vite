@@ -12,7 +12,7 @@ const { Text } = Typography;
 
 const RoleManage: FC = () => {
   const {
-    role: { list, total, loading, searchParams },
+    role: { list, total, searchParams },
     getRoleData,
   } = useSetting();
   const compRef = useRef<Role.RoleCompRef>(null);
@@ -91,7 +91,6 @@ const RoleManage: FC = () => {
         searchParams={{ ...searchParams }}
         columns={columns}
         dataSource={list}
-        loading={loading}
         total={total}
         rowKey="role_id"
         scrollX={900}

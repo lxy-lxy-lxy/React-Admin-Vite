@@ -14,6 +14,7 @@ import { debounce } from "lodash-es";
 import Button from "@components/Button";
 
 import styles from "./index.module.scss";
+import { useLoading } from "@utils/hooks/useLoading.ts";
 
 const { Search } = Input;
 const showTotal = (total: number) => `Total ${total} `;
@@ -61,6 +62,7 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
   const { userConfig, setUserConfig } = useGlobalStore();
   const [fullscreen, setFullscreen] = useState(false);
   const [height, setHeight] = useState<number | "max-content">("max-content");
+  const curLoading = useLoading();
 
   useLayoutEffect(() => {
     if (getData) {
@@ -200,7 +202,7 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
       </Flex>
       <Table
         size="small"
-        loading={loading}
+        loading={loading !== undefined ? loading : curLoading}
         pagination={{
           total,
           position: ["bottomCenter"],

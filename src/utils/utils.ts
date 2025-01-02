@@ -47,3 +47,28 @@ export function getErrorStr(ec: number | string) {
 export function isMobile() {
   return window.innerWidth < 500;
 }
+
+interface LoadingState {
+  key: string;
+  type?: "global" | "comp";
+  loading: boolean;
+}
+
+export function setLoading({ key, type = "global", loading }: LoadingState) {
+  if (key) {
+    const data = getLoading();
+    if (loading) {
+      if (!data[type]) data[type] = {};
+      data[type][key] = loading;
+    } else {
+      delete data[type][key];
+    }
+    sessionStorage.setItem("loading", JSON.stringify(data));
+  }
+}
+
+export function getLoading(key?: string, type?: "global" | "comp") {
+  const data = JSON.parse(sessionStorage.getItem("loading") || "{}");
+  if (!type) return data;
+  return (!key ? data[type] : data[type][key]) || {};
+}

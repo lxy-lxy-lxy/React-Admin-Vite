@@ -5,7 +5,6 @@ declare namespace Setting {
 declare namespace Role {
   interface State {
     role: {
-      loading: boolean;
       list: DataType[];
       total: number;
       searchParams: Params;

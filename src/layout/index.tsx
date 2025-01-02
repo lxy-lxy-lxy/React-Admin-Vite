@@ -2,7 +2,7 @@ import { CSSProperties, StrictMode, useEffect, FC } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { Layout, theme } from "antd";
 import HeaderComp from "./components/Header";
-import { useLoginStore } from "@stores/index";
+import { useGlobalStore, useLoginStore } from "@stores/index";
 import AuthRoute from "@components/AuthRoute";
 import SideBar from "./components/SideBar";
 import { getLocale } from "@utils/utils";
@@ -16,8 +16,9 @@ const { Header, Content, Footer } = Layout;
 const BasicLayout: FC = () => {
   const { userInfo } = useLoginStore();
   const {
-    token: { colorBgContainer, colorBorderSecondary },
+    token: { colorBgContainer },
   } = theme.useToken();
+  const tagStatus = useGlobalStore((state) => state.themeConfig.tagStatus);
 
   useEffect(() => {
     // 无感延迟避免初次进入页面的闪烁
@@ -40,6 +41,7 @@ const BasicLayout: FC = () => {
             "--localeFont": ["cn", "hk"].includes(getLocale())
               ? "1.4rem"
               : "1rem",
+            "--extraHeight": tagStatus ? "4.8rem" : "",
             display: "none",
             minHeight: "100vh",
           } as CSSProperties
@@ -50,16 +52,7 @@ const BasicLayout: FC = () => {
           <Header style={{ padding: "0 1rem", background: colorBgContainer }}>
             <HeaderComp />
           </Header>
-          <Header
-            style={{
-              padding: "0 1rem",
-              height: "4.8rem",
-              borderTop: `0.1rem solid ${colorBorderSecondary}`,
-              background: colorBgContainer,
-            }}
-          >
-            <TabHistory />
-          </Header>
+          {tagStatus && <TabHistory />}
           <Content className={styles.layout}>
             <AuthRoute>
               <Outlet />

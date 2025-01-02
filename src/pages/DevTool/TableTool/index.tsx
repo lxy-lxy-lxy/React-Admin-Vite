@@ -45,7 +45,7 @@ const columns: TableColumnsType = [
 
 const TableTool = () => {
   const {
-    table: { list, total, loading, searchParams },
+    table: { list, total, searchParams },
     getTableData,
   } = useTool();
 
@@ -134,7 +134,6 @@ const TableTool = () => {
         searchParams={{ ...searchParams }}
         columns={columns}
         dataSource={list}
-        loading={loading}
         total={total}
         rowKey="id"
       />

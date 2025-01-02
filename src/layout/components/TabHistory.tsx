@@ -1,9 +1,11 @@
 import { useEffect, useState, FC, MouseEvent, useContext } from "react";
-import { Flex, Tag } from "antd";
+import { Flex, Layout, Tag, theme } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import { RouteContext } from "../../main.tsx";
 
 import styles from "../index.module.scss";
+
+const { Header } = Layout;
 
 const TabHistory: FC = () => {
   const {
@@ -12,6 +14,9 @@ const TabHistory: FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [tagHistory, handleHistory] = useState(["/"]);
+  const {
+    token: { colorBgContainer, colorBorderSecondary },
+  } = theme.useToken();
 
   const setTagHistory = (key: string, opType = 1) => {
     let arr = [...tagHistory];
@@ -37,22 +42,31 @@ const TabHistory: FC = () => {
   };
 
   return (
-    <Flex align="center" className={styles.tabHistory}>
-      {tagHistory.map((tag) => {
-        const isSelect = pathname === tag;
-        return (
-          <Tag
-            key={tag}
-            className={`disSelect ${isSelect ? styles.selectedTag : styles.unselectedtag}`}
-            closeIcon={tag !== "/"}
-            onClose={(e) => onClose(e, tag)}
-            onClick={() => navigate(tag)}
-          >
-            <>{menusObj[tag]}</>
-          </Tag>
-        );
-      })}
-    </Flex>
+    <Header
+      style={{
+        padding: "0 1rem",
+        height: "4.8rem",
+        borderTop: `0.1rem solid ${colorBorderSecondary}`,
+        background: colorBgContainer,
+      }}
+    >
+      <Flex align="center" className={styles.tabHistory}>
+        {tagHistory.map((tag) => {
+          const isSelect = pathname === tag;
+          return (
+            <Tag
+              key={tag}
+              className={`disSelect ${isSelect ? styles.selectedTag : styles.unselectedtag}`}
+              closeIcon={tag !== "/"}
+              onClose={(e) => onClose(e, tag)}
+              onClick={() => navigate(tag)}
+            >
+              <>{menusObj[tag]}</>
+            </Tag>
+          );
+        })}
+      </Flex>
+    </Header>
   );
 };
 export default TabHistory;

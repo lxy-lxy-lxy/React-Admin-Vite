@@ -20,8 +20,8 @@ declare namespace GlobalStore {
     mode?: "light" | "dark";
     collapsed?: boolean;
     colorPrimary?: `#${string}`;
-    menuExtend?: 0 | 1;
-    tagStatus?: 0 | 1;
+    menuExtend?: boolean;
+    tagStatus?: boolean;
     tagStyle?: "card" | "demo";
     routeAn?: 0 | 1;
   }
