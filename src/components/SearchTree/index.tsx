@@ -97,9 +97,11 @@ const SearchTree: React.FC = () => {
   };
 
   const treeData = useMemo(() => {
+    dataList.splice(0);
     const loop = (data: TreeDataNode[]): TreeDataNode[] =>
       data.map((item) => {
         const strTitle = item.title as string;
+        dataList.push({ key: item.key, title: strTitle });
         const index = strTitle.indexOf(searchValue);
         const beforeStr = strTitle.substring(0, index);
         const afterStr = strTitle.slice(index + searchValue.length);
@@ -124,7 +126,7 @@ const SearchTree: React.FC = () => {
       });
 
     return loop(defaultData);
-  }, [searchValue]);
+  }, [defaultData, searchValue]);
 
   useEffect(() => {
     if (treeRef.current) {
