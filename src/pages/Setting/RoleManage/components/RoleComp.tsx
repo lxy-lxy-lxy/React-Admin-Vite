@@ -9,6 +9,7 @@ import {
 import type { ForwardedRef } from "react";
 import Button from "@components/Button";
 import { statusObj } from "@utils/enum.ts";
+import SearchTree from "@components/SearchTree";
 
 interface InitValues {
   role_id?: number;
@@ -131,7 +132,7 @@ const RoleComp: (
           </Col>
           <Col span={24}>
             <Form.Item name="remark" label={global.t("功能权限")}>
-              <Input.TextArea rows={3} placeholder={global.t("功能权限")} />
+              <SearchTree />
             </Form.Item>
           </Col>
         </Row>

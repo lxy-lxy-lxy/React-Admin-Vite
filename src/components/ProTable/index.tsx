@@ -26,7 +26,7 @@ interface Props<T> extends TableProps<T> {
   total?: number;
   scrollX?: number;
   loading?: boolean;
-  // 简单的关键词搜索，扩展搜索请使用 customTool 或 ProSearch（见DevTool/TableTool），复杂搜索不建议使用
+  // 简单的关键词搜索，扩展搜索请使用 customTool 或 ProSearch（见DevTool/Table），复杂搜索不建议使用
   onSearch?: (
     value: string,
     event?:
@@ -38,7 +38,7 @@ interface Props<T> extends TableProps<T> {
   onCreate?: (e: MouseEvent<HTMLElement>) => void;
   onExport?: (e: MouseEvent<HTMLElement>) => void;
   allowFullScreen?: boolean;
-  // 自定义工具栏，可扩展搜索，复杂搜索不建议使用（见DevTool/TableTool）
+  // 自定义工具栏，可扩展搜索，复杂搜索不建议使用（见DevTool/Table）
   customTool?: ReactNode;
 }
 
@@ -53,7 +53,7 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
     onSearch = undefined,
     onCreate = undefined,
     onExport = undefined,
-    allowFullScreen = true,
+    allowFullScreen = false,
     customTool = undefined,
     ...rest
   } = props;

@@ -21,9 +21,20 @@ const defaultChild = showDemo
         icon: "ToolOutlined",
         children: [
           {
-            path: "DevTool/TableTool",
             route: "TableTool",
             title: "表格",
+            children: [
+              {
+                path: "DevTool/TableTool/Table",
+                route: "Table",
+                title: "基础表格",
+              },
+              {
+                path: "DevTool/TableTool/TreeTable",
+                route: "TreeTable",
+                title: "左树右表",
+              },
+            ],
           },
           {
             path: "DevTool/EditorTool",
@@ -41,7 +52,6 @@ const defaultChild = showDemo
             title: "按钮",
           },
           {
-            path: "",
             route: "DataTool",
             title: "数据录入",
             children: [

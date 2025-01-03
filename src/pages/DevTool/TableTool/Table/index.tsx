@@ -43,7 +43,7 @@ const columns: TableColumnsType = [
   },
 ];
 
-const TableTool = () => {
+const Table = () => {
   const {
     table: { list, total, searchParams },
     getTableData,
@@ -140,4 +140,4 @@ const TableTool = () => {
     </>
   );
 };
-export default TableTool;
+export default Table;
