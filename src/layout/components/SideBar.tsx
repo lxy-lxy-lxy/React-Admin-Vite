@@ -49,7 +49,6 @@ const SideBar: FC = () => {
   ) => {
     const isChild = type === "child";
     if (isChild) {
-      console.log(key);
       navigate(key);
     }
     if (!isChild) {

@@ -23,7 +23,7 @@ declare namespace Role {
   }
 
   interface Params {
-    keyword?: string;
+    name?: string;
     page?: number;
     pageSize?: number;
   }
@@ -40,6 +40,36 @@ declare namespace Role {
 
 declare namespace User {
   interface State {
-    other: object;
+    user: {
+      list: DataType[];
+      total: number;
+      searchParams: Params;
+    };
+    getUserData: (params: Params) => void;
+    resetUserData: () => void;
+  }
+
+  interface DataType {
+    user_id: number;
+    user_name: string;
+    status: 0 | 1;
+    created_at: string;
+    updated_at: string;
+    email: string;
+  }
+
+  interface Params {
+    name?: string;
+    page?: number;
+    pageSize?: number;
+  }
+
+  interface Records {
+    total: number;
+    list: [];
+  }
+
+  interface UserCompRef {
+    open: (e?: DataType) => void;
   }
 }

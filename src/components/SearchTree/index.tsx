@@ -3,6 +3,7 @@ import { Input, Tree } from "antd";
 import type { TreeDataNode } from "antd";
 
 import "./index.css";
+import { checkEleInLayout } from "@utils/utils.ts";
 
 const { Search } = Input;
 
@@ -131,10 +132,14 @@ const SearchTree: React.FC = () => {
   useEffect(() => {
     if (treeRef.current) {
       const treeRect = (treeRef.current as Element).getBoundingClientRect();
+      const inLayout = checkEleInLayout(treeRef.current);
       const footer = document.getElementById("footerLayout");
       if (treeRect)
         setHeight(
-          window.innerHeight - treeRect.top - (footer!.offsetHeight + 25),
+          window.innerHeight -
+            treeRect.top -
+            (inLayout ? footer!.offsetHeight + 25 : 24),
+          // 边距24
         );
     }
   }, []);

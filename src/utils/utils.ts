@@ -72,3 +72,9 @@ export function getLoading(key?: string, type?: "global" | "comp") {
   if (!type) return data;
   return (!key ? data[type] : data[type][key]) || {};
 }
+
+// 节点是否在主页面，不在则位于model，drawer等位置
+export function checkEleInLayout(ele: Element) {
+  const content = document.getElementById("contentLayout");
+  return content && content.contains(ele);
+}

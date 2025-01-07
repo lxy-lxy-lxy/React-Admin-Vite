@@ -96,7 +96,7 @@ const RoleManage: FC = () => {
         scrollX={900}
         onSearch={(e) => {
           getData({
-            keyword: e,
+            name: e,
             page: 1,
           });
         }}

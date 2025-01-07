@@ -15,6 +15,7 @@ import Button from "@components/Button";
 
 import styles from "./index.module.scss";
 import { useLoading } from "@utils/hooks/useLoading.ts";
+import { checkEleInLayout } from "@utils/utils.ts";
 
 const { Search } = Input;
 const showTotal = (total: number) => `Total ${total} `;
@@ -112,8 +113,7 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
 
   const getHeight = (mode?: boolean) => {
     if (tableBoxRef.current) {
-      const content = document.getElementById("contentLayout");
-      if (content && content.contains(tableBoxRef.current)) {
+      if (checkEleInLayout(tableBoxRef.current)) {
         const footer = document.getElementById("footerLayout");
         const head = (tableBoxRef.current as Document).getElementsByClassName(
           "ant-table-thead",

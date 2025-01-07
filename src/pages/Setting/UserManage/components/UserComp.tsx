@@ -5,21 +5,18 @@ import {
   forwardRef,
   ReactNode,
   useEffect,
-  useContext,
 } from "react";
 import type { ForwardedRef } from "react";
 import Button from "@components/Button";
 import { statusObj } from "@utils/enum.ts";
-import SearchTree from "@components/SearchTree";
-import { RouteContext } from "../../../../main.tsx";
 
 interface InitValues {
-  role_id?: number;
-  role_name: string;
+  user_id?: number;
+  user_name: string;
   status: 0 | 1;
 }
 
-let initValues: Role.DataType | undefined = undefined;
+let initValues: User.DataType | undefined = undefined;
 
 const colLayout = {
   sm: 24,
@@ -27,18 +24,14 @@ const colLayout = {
   lg: 12,
 };
 
-const RoleComp: (
+const UserComp: (
   props: object,
-  ref: ForwardedRef<Role.RoleCompRef>,
+  ref: ForwardedRef<User.UserCompRef>,
 ) => ReactNode = (_, ref) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-  const {
-    routeData: { menus },
-  } = useContext(RouteContext)!;
 
   useEffect(() => {
-    console.log(menus);
     return () => {
       initValues = undefined;
     };
@@ -46,15 +39,15 @@ const RoleComp: (
 
   useImperativeHandle(ref, () => {
     return {
-      open(params?: Role.DataType) {
+      open(params?: User.DataType) {
         initValues = params;
         setOpen(true);
         if (params) {
           form.setFieldsValue({
-            role_id: params.role_id,
-            role_name: params.role_name,
+            user_id: params.user_id,
+            user_name: params.user_name,
             status: params.status,
-            remark: params.remark,
+            email: params.email,
           });
         }
       },
@@ -80,7 +73,7 @@ const RoleComp: (
 
   return (
     <Drawer
-      title={!initValues?.role_id ? global.t("添加角色") : global.t("编辑角色")}
+      title={!initValues?.user_id ? global.t("添加用户") : global.t("编辑用户")}
       width={720}
       onClose={onClose}
       open={open}
@@ -97,7 +90,7 @@ const RoleComp: (
       <Form
         layout="vertical"
         initialValues={{
-          role_name: "",
+          user_name: "",
           status: 1,
         }}
         onFinish={onFinish}
@@ -106,11 +99,11 @@ const RoleComp: (
         <Row gutter={16}>
           <Col {...colLayout}>
             <Form.Item
-              name="role_name"
-              label={global.t("角色")}
-              rules={[{ required: true, message: global.t("请输入角色名称") }]}
+              name="user_name"
+              label={global.t("用户")}
+              rules={[{ required: true, message: global.t("请输入用户名称") }]}
             >
-              <Input placeholder={global.t("请输入角色名称")} />
+              <Input placeholder={global.t("请输入用户名称")} />
             </Form.Item>
           </Col>
           <Col {...colLayout}>
@@ -126,29 +119,10 @@ const RoleComp: (
               </Radio.Group>
             </Form.Item>
           </Col>
-          <Col span={24}>
-            <Form.Item name="remark" label={global.t("备注")}>
-              <Input.TextArea
-                showCount
-                maxLength={200}
-                rows={3}
-                placeholder={global.t("备注")}
-              />
-            </Form.Item>
-          </Col>
-          <Col span={24}>
-            <Form.Item
-              name="remark"
-              label={global.t("功能权限")}
-              className="mb-0"
-            >
-              <SearchTree />
-            </Form.Item>
-          </Col>
         </Row>
       </Form>
     </Drawer>
   );
 };
 
-export default forwardRef(RoleComp);
+export default forwardRef(UserComp);
