@@ -83,6 +83,11 @@ const defaultChild = showDemo
             ],
           },
           {
+            path: "DevTool/DescriptionTool",
+            route: "DescriptionTool",
+            title: "描述列表",
+          },
+          {
             path: "DevTool/DividerTool",
             route: "DividerTool",
             title: "分割线",
