@@ -53,6 +53,7 @@ const TabHistory: FC = () => {
       <Flex align="center" className={styles.tabHistory}>
         {tagHistory.map((tag) => {
           const isSelect = pathname === tag;
+          const text = menusObj[tag] as string;
           return (
             <Tag
               key={tag}
@@ -61,7 +62,7 @@ const TabHistory: FC = () => {
               onClose={(e) => onClose(e, tag)}
               onClick={() => navigate(tag)}
             >
-              <>{menusObj[tag]}</>
+              {text}
             </Tag>
           );
         })}

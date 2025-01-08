@@ -80,6 +80,11 @@ const defaultChild = showDemo
                 route: "InputTool",
                 title: "输入框",
               },
+              {
+                path: "DevTool/DataTool/SelectTool",
+                route: "SelectTool",
+                title: "选择器",
+              },
             ],
           },
           {
