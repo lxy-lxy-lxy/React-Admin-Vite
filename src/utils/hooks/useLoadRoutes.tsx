@@ -42,6 +42,11 @@ const defaultChild = showDemo
             title: "富文本",
           },
           {
+            path: "DevTool/ListTool",
+            route: "ListTool",
+            title: "列表",
+          },
+          {
             path: "DevTool/ThemeTool",
             route: "ThemeTool",
             title: "主题",
