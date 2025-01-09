@@ -38,7 +38,6 @@ const RoleComp: (
   } = useContext(RouteContext)!;
 
   useEffect(() => {
-    console.log(menus);
     return () => {
       initValues = undefined;
     };
@@ -142,7 +141,13 @@ const RoleComp: (
               label={global.t("功能权限")}
               className="mb-0"
             >
-              <SearchTree />
+              <SearchTree
+                data={menus}
+                fieldNames={{
+                  key: "id",
+                  title: "label",
+                }}
+              />
             </Form.Item>
           </Col>
         </Row>

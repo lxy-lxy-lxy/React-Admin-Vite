@@ -1,56 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Input, Tree } from "antd";
-import type { TreeDataNode } from "antd";
+import type { TreeDataNode, TreeProps } from "antd";
+import { checkEleInLayout } from "@utils/utils.ts";
 
 import "./index.css";
-import { checkEleInLayout } from "@utils/utils.ts";
 
 const { Search } = Input;
 
-const x = 5;
-const y = 4;
-const z = 3;
-const defaultData: TreeDataNode[] = [];
-
-const generateData = (
-  _level: number,
-  _preKey?: React.Key,
-  _tns?: TreeDataNode[],
-) => {
-  const preKey = _preKey || "0";
-  const tns = _tns || defaultData;
-
-  const children: React.Key[] = [];
-  for (let i = 0; i < x; i++) {
-    const key = `${preKey}-${i}`;
-    tns.push({ title: key, key });
-    if (i < y) {
-      children.push(key);
-    }
-  }
-  if (_level < 0) {
-    return tns;
-  }
-  const level = _level - 1;
-  children.forEach((key, index) => {
-    tns[index].children = [];
-    return generateData(level, key, tns[index].children);
-  });
-};
-generateData(z);
-
 const dataList: { key: React.Key; title: string }[] = [];
-const generateList = (data: TreeDataNode[]) => {
-  for (let i = 0; i < data.length; i++) {
-    const node = data[i];
-    const { key } = node;
-    dataList.push({ key, title: key as string });
-    if (node.children) {
-      generateList(node.children);
-    }
-  }
-};
-generateList(defaultData);
 
 const getParentKey = (key: React.Key, tree: TreeDataNode[]): React.Key => {
   let parentKey: React.Key;
@@ -67,7 +24,11 @@ const getParentKey = (key: React.Key, tree: TreeDataNode[]): React.Key => {
   return parentKey!;
 };
 
-const SearchTree: React.FC = () => {
+interface SearchTreeProps extends TreeProps {
+  data: object[];
+}
+
+const SearchTree: React.FC<SearchTreeProps> = ({ data, fieldNames }) => {
   const [expandedKeys, setExpandedKeys] = useState<React.Key[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const [height, setHeight] = useState(650);
@@ -79,12 +40,48 @@ const SearchTree: React.FC = () => {
     setAutoExpandParent(false);
   };
 
+  const memoData = useMemo(() => {
+    const {
+      key = "key",
+      title = "title",
+      children = "children",
+    } = fieldNames || {};
+
+    const generateList = (data: Global.AnyObject[]): TreeDataNode[] =>
+      data.flatMap((item) => {
+        const keyVal = item[key] as string;
+        if (keyVal) {
+          const titleVal = item[title] as string;
+          const childVal = item[children] as [];
+          dataList.push({ key: keyVal, title: titleVal });
+          if (childVal) {
+            return {
+              title: titleVal,
+              key: keyVal,
+              children: generateList(childVal),
+            };
+          }
+
+          return [
+            {
+              title: titleVal,
+              key: keyVal,
+            },
+          ];
+        } else {
+          return [];
+        }
+      });
+
+    return generateList(data as Global.AnyObject[]);
+  }, [data]);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const newExpandedKeys = dataList
       .map((item) => {
         if (item.title.indexOf(value) > -1) {
-          return getParentKey(item.key, defaultData);
+          return getParentKey(item.key, memoData);
         }
         return null;
       })
@@ -98,36 +95,40 @@ const SearchTree: React.FC = () => {
   };
 
   const treeData = useMemo(() => {
-    dataList.splice(0);
     const loop = (data: TreeDataNode[]): TreeDataNode[] =>
-      data.map((item) => {
+      data.flatMap((item) => {
         const strTitle = item.title as string;
-        dataList.push({ key: item.key, title: strTitle });
-        const index = strTitle.indexOf(searchValue);
-        const beforeStr = strTitle.substring(0, index);
-        const afterStr = strTitle.slice(index + searchValue.length);
-        const title =
-          index > -1 ? (
-            <span key={item.key}>
-              {beforeStr}
-              <span className="site-tree-search-value">{searchValue}</span>
-              {afterStr}
-            </span>
-          ) : (
-            <span key={item.key}>{strTitle}</span>
-          );
-        if (item.children) {
-          return { title, key: item.key, children: loop(item.children) };
-        }
+        if (item.key) {
+          const index = strTitle.indexOf(searchValue);
+          const beforeStr = strTitle.substring(0, index);
+          const afterStr = strTitle.slice(index + searchValue.length);
+          const title =
+            index > -1 ? (
+              <span key={item.key}>
+                {beforeStr}
+                <span className="site-tree-search-value">{searchValue}</span>
+                {afterStr}
+              </span>
+            ) : (
+              <span key={item.key}>{strTitle}</span>
+            );
+          if (item.children) {
+            return { title, key: item.key, children: loop(item.children) };
+          }
 
-        return {
-          title,
-          key: item.key,
-        };
+          return [
+            {
+              title,
+              key: item.key,
+            },
+          ];
+        } else {
+          return [];
+        }
       });
 
-    return loop(defaultData);
-  }, [defaultData, searchValue]);
+    return loop(memoData);
+  }, [memoData, searchValue]);
 
   useEffect(() => {
     if (treeRef.current) {

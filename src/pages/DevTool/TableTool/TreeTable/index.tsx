@@ -3,6 +3,8 @@ import ProTable from "@components/ProTable";
 import type { TableColumnsType } from "antd";
 import { useTool } from "@stores/tool";
 import SearchTree from "@components/SearchTree";
+import { useContext } from "react";
+import { RouteContext } from "../../../../main.tsx";
 
 const columns: TableColumnsType = [
   {
@@ -48,6 +50,9 @@ const TreeTable = () => {
     table: { list, total, searchParams },
     getTableData,
   } = useTool();
+  const {
+    routeData: { menus },
+  } = useContext(RouteContext)!;
 
   const getData = (params: object) => {
     getTableData({
@@ -59,7 +64,13 @@ const TreeTable = () => {
   return (
     <Row gutter={16}>
       <Col xs={24} md={8} lg={6} xl={4}>
-        <SearchTree />
+        <SearchTree
+          data={menus}
+          fieldNames={{
+            key: "id",
+            title: "label",
+          }}
+        />
       </Col>
       <Col xs={24} md={16} lg={18} xl={20}>
         <ProTable
