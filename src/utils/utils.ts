@@ -63,7 +63,15 @@ export function setLoading({ key, type = "global", loading }: LoadingState) {
     } else {
       delete data[type][key];
     }
-    sessionStorage.setItem("loading", JSON.stringify(data));
+    const value = JSON.stringify(data);
+    sessionStorage.setItem("loading", value);
+    const event = new CustomEvent("storageChange", {
+      detail: {
+        key: "loading",
+        value,
+      },
+    });
+    window.dispatchEvent(event);
   }
 }
 

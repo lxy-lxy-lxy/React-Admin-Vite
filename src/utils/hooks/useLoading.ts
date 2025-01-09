@@ -3,16 +3,15 @@ import { useEffect, useState } from "react";
 
 export const useLoading = (loadingKey?: "") => {
   const type = loadingKey ? "comp" : "global";
-  const sessionLoading = getLoading(loadingKey, type);
   const [timer, setTimer] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const curLoading =
-    type === "global"
-      ? Object.keys(sessionLoading).length > 0
-      : !!sessionLoading;
-
-  useEffect(() => {
+  const getCurLoading = () => {
+    const sessionLoading = getLoading(loadingKey, type);
+    const curLoading =
+      type === "global"
+        ? Object.keys(sessionLoading).length > 0
+        : !!sessionLoading;
     if (curLoading) {
       if (timer) {
         clearTimeout(timer);
@@ -25,7 +24,15 @@ export const useLoading = (loadingKey?: "") => {
       }, 150);
       setTimer(newTimer);
     }
-  }, [curLoading]);
+  };
+
+  useEffect(() => {
+    window.addEventListener("storageChange", getCurLoading, false);
+
+    return () => {
+      window.removeEventListener("storageChange", getCurLoading, false);
+    };
+  }, []);
 
   return loading;
 };
