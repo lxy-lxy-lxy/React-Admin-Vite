@@ -98,6 +98,16 @@ const defaultChild = showDemo
             title: "描述列表",
           },
           {
+            path: "DevTool/SegmentedTool",
+            route: "SegmentedTool",
+            title: "分段控制器",
+          },
+          {
+            path: "DevTool/QRCodeTool",
+            route: "QRCodeTool",
+            title: "二维码",
+          },
+          {
             path: "DevTool/DividerTool",
             route: "DividerTool",
             title: "分割线",
