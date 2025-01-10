@@ -114,6 +114,19 @@ const defaultChild = showDemo
           },
         ],
       },
+      // {
+      //   path: "",
+      //   route: "other",
+      //   title: "其它",
+      //   icon: "BookOutlined",
+      //   children: [
+      //     {
+      //       path: "Other/DCTImg",
+      //       route: "DCTImg",
+      //       title: "DCT变换",
+      //     },
+      //   ],
+      // },
     ]
   : [];
 
