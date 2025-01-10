@@ -4,10 +4,11 @@ import { Flex, Upload } from "antd";
 import type { GetProp, UploadProps } from "antd";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
+/*
 
 // 转换为灰度图
-function convertToGrayscale(dataArray) {
-  let data = [...dataArray];
+function convertToGrayscale(dataArray: number[]) {
+  const data = [...dataArray];
   for (let i = 0; i < data.length; i += 4) {
     const r = data[i];
 
@@ -67,7 +68,7 @@ function getMatrixRange(matrix: number[][], range: number = 1) {
   return rangeMatrix;
 }
 
-function getPHashFingerprint(data) {
+function getPHashFingerprint(data: number[]) {
   const dctData = dct(convertToGrayscale(data));
   const dctMatrix = createMatrix(dctData);
   const rangeMatrix = getMatrixRange(dctMatrix, dctMatrix.length / 8);
@@ -109,6 +110,7 @@ function dct(signal: number[], scale: number = 2) {
     );
   });
 }
+*/
 
 const getBase64 = (img: FileType, callback: (url: string) => void) => {
   const reader = new FileReader();
@@ -120,8 +122,10 @@ const App: React.FC = () => {
   const [imageUrl, setImageUrl] = useState<string>();
 
   const handleImage = async () => {
-    const { data } = await compressImg(imageUrl);
-    console.log(getPHashFingerprint(data));
+    if (imageUrl) {
+      // const { data } = await compressImg(imageUrl);
+      // console.log(getPHashFingerprint(data));
+    }
   };
 
   useEffect(() => {
