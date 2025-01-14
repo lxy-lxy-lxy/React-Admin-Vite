@@ -19,6 +19,7 @@ const BasicLayout: FC = () => {
     token: { colorBgContainer },
   } = theme.useToken();
   const tagStatus = useGlobalStore((state) => state.themeConfig.tagStatus);
+  const fontSize = useGlobalStore((state) => state.themeConfig.fontSize);
 
   useEffect(() => {
     // 无感延迟避免初次进入页面的闪烁
@@ -39,8 +40,8 @@ const BasicLayout: FC = () => {
         style={
           {
             "--localeFont": ["cn", "hk"].includes(getLocale())
-              ? "1.4rem"
-              : "1rem",
+              ? `${(fontSize || 15) / 10}rem`
+              : `${((fontSize || 15) - 4) / 10}rem`,
             "--extraHeight": tagStatus ? "4.8rem" : "",
             display: "none",
             minHeight: "100vh",

@@ -1,6 +1,11 @@
 import { FC } from "react";
 import { Avatar, Dropdown, Space, Badge, Switch } from "antd";
-import { BellOutlined, MoonOutlined, SunOutlined } from "@ant-design/icons";
+import {
+  BellOutlined,
+  MoonOutlined,
+  SunOutlined,
+  FontSizeOutlined,
+} from "@ant-design/icons";
 import { getLocale, setLocale } from "@utils/utils";
 import { useNavigate } from "react-router-dom";
 import { useGlobalStore } from "@stores/index";
@@ -18,6 +23,10 @@ const RightContent: FC = () => {
 
   const handleLangClick: MenuProps["onClick"] = ({ key }) => {
     setLocale(key);
+  };
+
+  const handleFontClick: MenuProps["onClick"] = ({ key }) => {
+    setThemeConfig({ fontSize: Number(key) });
   };
 
   const handleUserClick: MenuProps["onClick"] = ({ key }) => {
@@ -70,9 +79,24 @@ const RightContent: FC = () => {
     },
   ];
 
-  /* const changeMainColor = (e) => {
-								setThemeConfig(e.target.value);
-				};*/
+  const fontItems = [
+    {
+      key: 13,
+      label: "13px",
+    },
+    {
+      key: 14,
+      label: "14px",
+    },
+    {
+      key: 15,
+      label: "15px",
+    },
+    {
+      key: 16,
+      label: "16px",
+    },
+  ];
 
   return (
     <Space
@@ -105,6 +129,16 @@ const RightContent: FC = () => {
                                 onChange={debounce(changeMainColor, 500)}
                         ></Input>
                 </div>*/}
+      <Dropdown
+        menu={{ items: fontItems, onClick: handleFontClick }}
+        placement="bottom"
+        arrow
+      >
+        <div>
+          <FontSizeOutlined />
+          {fontItems.find((item) => item.key === themeConfig.fontSize)?.label}
+        </div>
+      </Dropdown>
       <Dropdown
         menu={{ items: langItems, onClick: handleLangClick }}
         placement="bottom"

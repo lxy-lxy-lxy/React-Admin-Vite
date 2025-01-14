@@ -9,6 +9,7 @@ const initThemeConfig: GlobalStore.ThemeConfig = {
   collapsed: false,
   colorPrimary: "#1677ff",
   menuExtend: false,
+  fontSize: 15,
   tagStatus: false,
   tagStyle: "card",
   routeAn: 1,

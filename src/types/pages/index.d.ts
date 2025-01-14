@@ -21,6 +21,7 @@ declare namespace GlobalStore {
     collapsed?: boolean;
     colorPrimary?: `#${string}`;
     menuExtend?: boolean;
+    fontSize?: number;
     tagStatus?: boolean;
     tagStyle?: "card" | "demo";
     routeAn?: 0 | 1;

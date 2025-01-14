@@ -64,6 +64,7 @@ const App = () => {
           },
         },
         token: {
+          fontSize: themeConfig.fontSize || 15,
           colorPrimary: themeConfig.colorPrimary,
         },
       }}

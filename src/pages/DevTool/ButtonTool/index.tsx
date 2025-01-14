@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card } from "antd";
-import BasicButton from "./components/BasicButton.tsx";
+import Basic from "./components/Basic.tsx";
 
 const tabListNoTitle = [
   {
@@ -10,7 +10,7 @@ const tabListNoTitle = [
 ];
 
 const contentListNoTitle: Record<string, React.ReactNode> = {
-  basic: <BasicButton />,
+  basic: <Basic />,
 };
 
 const ButtonTool: React.FC = () => {
