@@ -119,6 +119,19 @@ const defaultChild = showDemo
           },
         ],
       },
+      {
+        path: "",
+        route: "other",
+        title: "其他",
+        icon: "ToolOutlined",
+        children: [
+          {
+            path: "Other/KeepAlive",
+            route: "KeepAlive",
+            title: "KeepAlive",
+          },
+        ],
+      },
     ]
   : [];
 
