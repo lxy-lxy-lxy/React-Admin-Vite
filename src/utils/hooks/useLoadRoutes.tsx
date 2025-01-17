@@ -119,7 +119,7 @@ const defaultChild = showDemo
           },
         ],
       },
-      {
+      /* {
         path: "",
         route: "other",
         title: "其他",
@@ -131,7 +131,7 @@ const defaultChild = showDemo
             title: "KeepAlive",
           },
         ],
-      },
+      },*/
     ]
   : [];
 
