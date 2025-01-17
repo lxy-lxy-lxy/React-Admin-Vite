@@ -1,12 +1,5 @@
 import type { ReactNode, RefObject } from "react";
-import {
-  Fragment,
-  memo,
-  useImperativeHandle,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { memo, useImperativeHandle, useLayoutEffect, useState } from "react";
 import CacheComp from "@components/KeepAlive/CacheComp";
 import KeepAliveProvider from "@components/KeepAlive/KeepAliveProvider";
 
@@ -46,12 +39,11 @@ interface Props extends ComponentReactElement {
 
 const KeepAlive = memo(function KeepAlive(props: Props) {
   const { activeKey, cache, children, exclude, include, max, aliveRef } = props;
-  const containerRef = useRef<HTMLDivElement>(null);
   const [cacheReactNodes, setCacheReactNodes] = useState<
     Array<{
       name: string;
-      ele?: ReactNode;
       cache: boolean;
+      ele: ReactNode;
     }>
   >([]);
 
@@ -122,22 +114,13 @@ const KeepAlive = memo(function KeepAlive(props: Props) {
   }, [children, cache, activeKey, exclude, max, include]);
 
   return (
-    <Fragment>
-      <div ref={containerRef} className="keep-alive" />
-      <KeepAliveProvider initialActiveKey={activeKey}>
-        {cacheReactNodes?.map(({ name, cache, ele }) => (
-          <CacheComp
-            active={name === activeKey}
-            renderDiv={containerRef}
-            cache={cache}
-            name={name}
-            key={name}
-          >
-            {ele}
-          </CacheComp>
-        ))}
-      </KeepAliveProvider>
-    </Fragment>
+    <KeepAliveProvider>
+      {cacheReactNodes?.map(({ name, cache, ele }) => (
+        <CacheComp active={name === activeKey} cache={cache} key={name}>
+          {ele}
+        </CacheComp>
+      ))}
+    </KeepAliveProvider>
   );
 });
 

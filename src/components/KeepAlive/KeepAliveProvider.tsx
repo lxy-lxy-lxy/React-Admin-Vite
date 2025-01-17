@@ -1,36 +1,64 @@
-import {
-  createContext,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useLayoutEffect,
-  useState,
-} from "react";
+import { createContext, FC, PropsWithChildren } from "react";
 
-export const KeepAliveContext = createContext<{
-  activeKey?: string;
-  setActiveKey?: Dispatch<SetStateAction<string | undefined>>;
-}>({
-  activeKey: undefined,
-  setActiveKey: () => {},
-});
+// const KeepAliveContext = createContext<{
+//   registerActiveEffect: (effectCallback: unknown) => void;
+//   registerDeactiveEffect: (effectCallback: unknown) => void;
+// }>({
+//   registerActiveEffect: () => void 0,
+//   registerDeactiveEffect: () => void 0,
+// });
 
-const KeepAliveProvider = (props: {
-  children?: ReactNode;
-  initialActiveKey?: string;
-}) => {
-  const { initialActiveKey, children } = props;
+const KeepAliveContext = createContext({});
 
-  const [activeKey, setActiveKey] = useState<string | undefined>(
-    initialActiveKey,
-  );
+// export const useActiveEffect = (callback) => {
+//   const { registerActiveEffect } = useContext(KeepAliveContext);
+//
+//   useEffect(() => {
+//     registerActiveEffect?.(callback);
+//   }, []);
+// };
+//
+// export const useDeactiveEffect = (callback) => {
+//   const { registerDeactiveEffect } = useContext(KeepAliveContext);
+//
+//   useEffect(() => {
+//     registerDeactiveEffect?.(callback);
+//   }, []);
+// };
 
-  useLayoutEffect(() => {
-    setActiveKey(initialActiveKey);
-  }, [initialActiveKey]);
+const KeepAliveProvider: FC<PropsWithChildren> = ({ children }) => {
+  // const activeEffects = useRef([]);
+  // const deactiveEffects = useRef([]);
+
+  /*const registerActiveEffect = (callback) => {
+    activeEffects.current.push(() => {
+      callback();
+    });
+  };
+
+  const registerDeactiveEffect = (callback) => {
+    deactiveEffects.current.push(() => {
+      callback();
+    });
+  };*/
+
+  /* useEffect(() => {
+    if (active) {
+      activeEffects.current.forEach((effect) => {
+        effect();
+      });
+    } else {
+      deactiveEffects.current.forEach((effect) => {
+        effect();
+      });
+    }
+  }, [active]);*/
 
   return (
-    <KeepAliveContext.Provider value={{ activeKey, setActiveKey }}>
+    <KeepAliveContext.Provider
+      value={{}}
+      // value={{ registerActiveEffect, registerDeactiveEffect }}
+    >
       {children}
     </KeepAliveContext.Provider>
   );

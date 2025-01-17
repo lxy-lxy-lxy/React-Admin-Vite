@@ -1,51 +1,36 @@
-import {
-  FC,
-  Fragment,
-  PropsWithChildren,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { createPortal } from "react-dom";
+import { FC, Fragment, PropsWithChildren, useRef, Suspense } from "react";
 
 interface Props {
   active: boolean;
   cache: boolean;
-  name: string;
-  renderDiv: RefObject<HTMLDivElement>;
 }
 
-const CacheComp: FC<Props & PropsWithChildren> = ({
-  active,
+const Wrapper: FC<PropsWithChildren & { active: boolean }> = ({
   children,
-  name,
-  renderDiv,
+  active,
 }) => {
-  const [targetElement] = useState(() => document.createElement("div"));
-  const activatedRef = useRef(false);
-  activatedRef.current = activatedRef.current || active;
-  useEffect(() => {
-    if (active) {
-      // 挂载路由ReactElement（chidren）节点
-      renderDiv.current?.appendChild(targetElement);
-    } else {
-      try {
-        // 卸载路由ReactElement（chidren）节点
-        renderDiv.current?.removeChild(targetElement);
-      } catch (e) {
-        console.log(e, "removeChild error");
-      }
+  const resolveRef = useRef<(value: unknown) => void>();
+
+  if (active) {
+    if (resolveRef.current) {
+      resolveRef.current("");
+      resolveRef.current = undefined;
     }
-  }, [active, renderDiv, targetElement]);
-  useEffect(() => {
-    // 设置id 用于区分不同的路由ReactElement节点 获取激活状态 这里的id⭐️有大用 后面说
-    targetElement.setAttribute("id", name);
-  }, [name, targetElement]);
-  // 把当前的 chidren ReactElement 挂载到targetElement里面
+  } else {
+    throw new Promise((resolve) => {
+      resolveRef.current = resolve;
+    });
+  }
+
+  return children;
+};
+
+const CacheComp: FC<Props & PropsWithChildren> = ({ active, children }) => {
   return (
     <Fragment>
-      {activatedRef.current && createPortal(children, targetElement)}
+      <Suspense fallback={null}>
+        <Wrapper active={active}>{children}</Wrapper>
+      </Suspense>
     </Fragment>
   );
 };
