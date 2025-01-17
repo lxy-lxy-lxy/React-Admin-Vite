@@ -36,11 +36,11 @@ const AuthRoute: FC<PropsWithChildren> = ({ children }) => {
     return <Navigate to="/login" replace />;
   } else if (isAdmin || obj[pathname]) {
     return (
-      <Card id="contentLayout" style={{ minHeight: "100%" }}>
-        <Suspense fallback={<Loading />}>
-          <KeepAlive activeKey={pathname}>{children}</KeepAlive>
-        </Suspense>
-      </Card>
+      <KeepAlive activeKey={pathname}>
+        <Card id="contentLayout" style={{ minHeight: "100%" }}>
+          <Suspense fallback={<Loading />}>{children}</Suspense>
+        </Card>
+      </KeepAlive>
     );
   }
 

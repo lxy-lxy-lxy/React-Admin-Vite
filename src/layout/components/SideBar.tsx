@@ -63,6 +63,9 @@ const SideBar: FC = () => {
 
   const renderOpenKeys = () => {
     const arr = pathname.split("/").slice(1);
+    if (arr.length < 2) {
+      return ["/"];
+    }
     return arr.map((_, index) => `/${arr.slice(0, index + 1).join("/")}`);
   };
 
