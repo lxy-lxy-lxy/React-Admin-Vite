@@ -3,7 +3,7 @@ import type { ChangeEvent, MouseEvent, KeyboardEvent } from "react";
 import { Flex, Table, Input } from "antd";
 import type { TableProps } from "antd";
 import { useLocation } from "react-router-dom";
-import { useGlobalStore } from "@stores/index";
+import { useGlobalStore } from "@/stores/index";
 import {
   PlusOutlined,
   ExportOutlined,
@@ -11,11 +11,11 @@ import {
   FullscreenExitOutlined,
 } from "@ant-design/icons";
 import { debounce } from "lodash-es";
-import Button from "@components/Button";
+import Button from "@/components/Button";
 
 import styles from "./index.module.scss";
-import { useLoading } from "@utils/hooks/useLoading.ts";
-import { checkEleInLayout } from "@utils/utils.ts";
+import { useLoading } from "@/utils/hooks/useLoading.ts";
+import { checkEleInLayout } from "@/utils/utils.ts";
 
 const { Search } = Input;
 const showTotal = (total: number) => `Total ${total} `;

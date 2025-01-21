@@ -1,5 +1,5 @@
 //  加载所有语言包
-const modules = import.meta.glob("@i18n/**/*.json", {
+const modules = import.meta.glob("@/i18n/**/*.json", {
   eager: true,
 }) as Record<string, { default: never }>;
 

@@ -6,8 +6,8 @@ import {
   subscribeWithSelector,
   createJSONStorage,
 } from "zustand/middleware";
-import { createRoleStore } from "@stores/setting/role";
-import { createUserStore } from "@stores/setting/user";
+import { createRoleStore } from "@/stores/setting/role";
+import { createUserStore } from "@/stores/setting/user";
 
 export const useSetting = create<
   Setting.State,

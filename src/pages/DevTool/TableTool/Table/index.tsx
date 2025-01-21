@@ -1,8 +1,8 @@
 import { Form, Input } from "antd";
-import ProTable from "@components/ProTable";
-import ProSearch from "@components/ProSearch";
+import ProTable from "@/components/ProTable";
+import ProSearch from "@/components/ProSearch";
 import type { TableColumnsType } from "antd";
-import { useTool } from "@stores/tool";
+import { useTool } from "@/stores/tool";
 
 const columns: TableColumnsType = [
   {

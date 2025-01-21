@@ -7,8 +7,8 @@ import {
   useEffect,
 } from "react";
 import type { ForwardedRef } from "react";
-import Button from "@components/Button";
-import { statusObj } from "@utils/enum.ts";
+import Button from "@/components/Button";
+import { statusObj } from "@/utils/enum.ts";
 
 interface InitValues {
   user_id?: number;

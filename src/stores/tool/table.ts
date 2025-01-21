@@ -1,4 +1,4 @@
-import { get } from "@services/axios";
+import { get } from "@/services/axios";
 import { StateCreator } from "zustand";
 
 const tableData = "/tableTool/getTableList";

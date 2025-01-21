@@ -1,14 +1,14 @@
 import { FC, PropsWithChildren, Suspense, useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import NoAuthPage from "@components/NoAuthPage";
-import { useLoginStore } from "@stores/index";
+import NoAuthPage from "@/components/NoAuthPage";
+import { useLoginStore } from "@/stores/index";
 // import { CSSTransition, SwitchTransition } from "react-transition-group";
 import NProgress from "nprogress";
 import { Card, Spin } from "antd";
 
 import "nprogress/nprogress.css";
 import "./index.css";
-import KeepAlive from "@components/KeepAlive/KeepAlive.tsx";
+import KeepAlive from "@/components/KeepAlive/KeepAlive.tsx";
 
 const Loading = () => {
   useEffect(() => {

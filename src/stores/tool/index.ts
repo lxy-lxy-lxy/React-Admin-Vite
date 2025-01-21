@@ -6,8 +6,8 @@ import {
   subscribeWithSelector,
   createJSONStorage,
 } from "zustand/middleware";
-import { createTableStore } from "@stores/tool/table";
-import { createOtherStore } from "@stores/tool/other.ts";
+import { createTableStore } from "@/stores/tool/table";
+import { createOtherStore } from "@/stores/tool/other.ts";
 
 export const useTool = create<
   DevTool.State,

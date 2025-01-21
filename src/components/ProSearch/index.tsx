@@ -9,8 +9,8 @@ import {
 import { Col, Form, Row } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { cloneDeep } from "lodash-es";
-import { useGlobalStore } from "@stores/index";
-import Button from "@components/Button";
+import { useGlobalStore } from "@/stores/index";
+import Button from "@/components/Button";
 
 import styles from "./index.module.scss";
 

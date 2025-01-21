@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
-import { isMobile } from "@utils/utils";
-import { get } from "@services/axios.ts";
+import { isMobile } from "@/utils/utils";
+import { get } from "@/services/axios.ts";
 
 const initThemeConfig: GlobalStore.ThemeConfig = {
   mode: "light",

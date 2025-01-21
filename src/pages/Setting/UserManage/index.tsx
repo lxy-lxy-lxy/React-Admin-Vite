@@ -1,12 +1,12 @@
 import { FC, useRef } from "react";
-import ProTable from "@components/ProTable";
+import ProTable from "@/components/ProTable";
 import { message, Space, Tag } from "antd";
 import type { TableColumnsType } from "antd";
-import { useSetting } from "@stores/setting";
-import Button from "@components/Button";
+import { useSetting } from "@/stores/setting";
+import Button from "@/components/Button";
 import UserComp from "./components/UserComp.tsx";
-import { statusObj } from "@utils/enum.ts";
-import Page from "@layout/components/Page.tsx";
+import { statusObj } from "@/utils/enum.ts";
+import Page from "@/layout/components/Page.tsx";
 
 const UserManage: FC = () => {
   const {

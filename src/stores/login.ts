@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { post } from "@services/axios.ts";
+import { post } from "@/services/axios.ts";
 
 const login = "/user/login";
 

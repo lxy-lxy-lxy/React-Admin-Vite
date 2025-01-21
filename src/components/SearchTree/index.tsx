@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Input, Tree } from "antd";
 import type { TreeDataNode, TreeProps } from "antd";
-import { checkEleInLayout } from "@utils/utils.ts";
+import { checkEleInLayout } from "@/utils/utils.ts";
 
 import "./index.css";
 

@@ -6,14 +6,14 @@ import {
   SunOutlined,
   FontSizeOutlined,
 } from "@ant-design/icons";
-import { getLocale, setLocale } from "@utils/utils";
+import { getLocale, setLocale } from "@/utils/utils";
 import { useNavigate } from "react-router-dom";
-import { useGlobalStore } from "@stores/index";
+import { useGlobalStore } from "@/stores/index";
 import type { MenuProps } from "antd";
 
-import cn from "@assets/img/flag/cn.svg";
-import hk from "@assets/img/flag/hk.svg";
-import en from "@assets/img/flag/gb.svg";
+import cn from "@/assets/img/flag/cn.svg";
+import hk from "@/assets/img/flag/hk.svg";
+import en from "@/assets/img/flag/gb.svg";
 
 import styles from "../index.module.scss";
 

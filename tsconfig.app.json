@@ -14,19 +14,13 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src",
-    "types": ["vite/client"],
+    "baseUrl": ".",
     "paths": {
-      "@pages/*": ["pages/*"],
-      "@components/*": ["components/*"],
-      "@stores/*": ["stores/*"],
-      "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"],
-      "@assets/*": ["assets/*"],
-      "@locales/*": ["locales/*"],
-      "@i18n/*": ["i18n/*"],
-      "@layout/*": ["layout/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
+    "types": ["vite/client"],
 
     /* Linting */
     "strict": true,

@@ -1,13 +1,13 @@
 import { Suspense, lazy, useEffect } from "react";
 import { ConfigProvider, Spin, theme } from "antd";
-import { useGlobalStore } from "@stores/index.ts";
+import { useGlobalStore } from "@/stores/index.ts";
 import zh_HK from "antd/locale/zh_HK";
 import zhCN from "antd/locale/zh_CN";
 import enUS from "antd/locale/en_US";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import "antd/dist/reset.css";
-import { getLocale, isMobile } from "@utils/utils.ts";
+import { getLocale, isMobile } from "@/utils/utils.ts";
 import { useTranslation } from "react-i18next";
 
 dayjs.locale("zh-cn");

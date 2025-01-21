@@ -1,5 +1,5 @@
 import { Dropdown, Flex } from "antd";
-import Button from "@components/Button";
+import Button from "@/components/Button";
 import type { MenuProps } from "antd";
 
 const items = [

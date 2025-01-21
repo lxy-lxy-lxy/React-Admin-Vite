@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Checkbox, Form, Input, Select, Steps, Radio } from "antd";
 import type { FormProps } from "antd";
-import Button from "@components/Button";
+import Button from "@/components/Button";
 
 const { Option } = Select;
 const formItemLayout = {

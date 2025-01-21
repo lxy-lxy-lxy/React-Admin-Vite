@@ -1,8 +1,8 @@
 import { Col, Row } from "antd";
-import ProTable from "@components/ProTable";
+import ProTable from "@/components/ProTable";
 import type { TableColumnsType } from "antd";
-import { useTool } from "@stores/tool";
-import SearchTree from "@components/SearchTree";
+import { useTool } from "@/stores/tool";
+import SearchTree from "@/components/SearchTree";
 import { useContext } from "react";
 import { RouteContext } from "../../../../main.tsx";
 

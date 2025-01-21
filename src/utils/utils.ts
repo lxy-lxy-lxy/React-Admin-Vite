@@ -1,5 +1,5 @@
 ﻿import { changeLanguage } from "i18next";
-import { errorCode } from "@utils/enum";
+import { errorCode } from "@/utils/enum";
 
 /**
  * @returns string

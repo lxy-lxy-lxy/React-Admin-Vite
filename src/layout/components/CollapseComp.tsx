@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { useGlobalStore } from "@stores/index";
-import Button from "@components/Button";
+import { useGlobalStore } from "@/stores/index";
+import Button from "@/components/Button";
 import styles from "../index.module.scss";
 
 const CollapseComp: FC = (props) => {

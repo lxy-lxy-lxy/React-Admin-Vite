@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { LockOutlined, QrcodeOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { Form, message, Input, Button, Row } from "antd";
-import { useLoginStore } from "@stores/index";
-import logo from "@assets/img/logo/logo.svg";
+import { useLoginStore } from "@/stores/index";
+import logo from "@/assets/img/logo/logo.svg";
 import md5 from "md5";
-import { logoutClearStorage } from "@utils/utils";
+import { logoutClearStorage } from "@/utils/utils";
 
 import styles from "../index.module.scss";
 

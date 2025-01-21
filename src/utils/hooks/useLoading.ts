@@ -1,4 +1,4 @@
-import { getLoading } from "@utils/utils.ts";
+import { getLoading } from "@/utils/utils.ts";
 import { useEffect, useState } from "react";
 
 export const useLoading = (loadingKey?: "") => {

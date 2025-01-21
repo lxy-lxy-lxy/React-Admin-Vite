@@ -1,7 +1,7 @@
 import type { ReactNode, RefObject } from "react";
 import { memo, useImperativeHandle, useLayoutEffect, useState } from "react";
-import CacheComp from "@components/KeepAlive/CacheComp";
-import KeepAliveProvider from "@components/KeepAlive/KeepAliveProvider";
+import CacheComp from "@/components/KeepAlive/CacheComp";
+import KeepAliveProvider from "@/components/KeepAlive/KeepAliveProvider";
 
 function isNil(value: unknown) {
   return value === null || value === undefined;

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import type { PropsWithChildren } from "react";
-import ErrorPage from "@components/ErrorPage/index.tsx";
+import ErrorPage from "@/components/ErrorPage/index.tsx";
 
 interface State {
   hasError: boolean;

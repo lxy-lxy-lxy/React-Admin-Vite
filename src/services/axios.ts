@@ -1,6 +1,6 @@
 import axios, { Canceler, InternalAxiosRequestConfig } from "axios"; // axios引用
-import { getErrorStr, setLoading } from "@utils/utils";
-import { message } from "antd";
+import { getErrorStr, setLoading } from "@/utils/utils";
+import { message } from "@/utils/message.ts";
 
 const env = import.meta.env;
 

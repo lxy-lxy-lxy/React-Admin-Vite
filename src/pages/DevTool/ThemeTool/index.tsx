@@ -11,7 +11,7 @@ import {
   message,
 } from "antd";
 import { debounce } from "lodash-es";
-import { useGlobalStore } from "@stores/index";
+import { useGlobalStore } from "@/stores/index";
 import type { ColorPickerProps } from "antd";
 
 interface Props {

@@ -1,12 +1,12 @@
 import { ComponentType, lazy, useEffect, useState } from "react";
 import { createBrowserRouter, Navigate, RouteObject } from "react-router-dom";
-import { useGlobalStore } from "@stores/index.ts";
+import { useGlobalStore } from "@/stores/index.ts";
 import App from "../../App.tsx";
-import ErrorPage from "@components/ErrorPage";
-import LoginPage from "@layout/components/Login.tsx";
-import { Icon } from "@utils/menuTool.ts";
+import ErrorPage from "@/components/ErrorPage";
+import LoginPage from "@/layout/components/Login.tsx";
+import { Icon } from "@/utils/menuTool.ts";
 
-const modules = import.meta.glob("@pages/**/index.tsx");
+const modules = import.meta.glob("@/pages/**/index.tsx");
 
 const showDemo = ["local", "development"].includes(
   import.meta.env.VITE_NODE_ENV,

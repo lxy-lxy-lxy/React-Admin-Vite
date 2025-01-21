@@ -7,10 +7,10 @@ import type {
 } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { Layout, Menu } from "antd";
-import { useGlobalStore, useLoginStore } from "@stores/index";
+import { useGlobalStore, useLoginStore } from "@/stores/index";
 import { RouteContext } from "../../main.tsx";
 
-import logo from "@assets/img/logo/logo.svg";
+import logo from "@/assets/img/logo/logo.svg";
 import styles from "../index.module.scss";
 
 const { Sider } = Layout;

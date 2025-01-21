@@ -2,10 +2,10 @@ import { CSSProperties, StrictMode, useEffect, FC } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { Layout, theme } from "antd";
 import HeaderComp from "./components/Header";
-import { useGlobalStore, useLoginStore } from "@stores/index";
-import AuthRoute from "@components/AuthRoute";
+import { useGlobalStore, useLoginStore } from "@/stores/index";
+import AuthRoute from "@/components/AuthRoute";
 import SideBar from "./components/SideBar";
-import { getLocale } from "@utils/utils";
+import { getLocale } from "@/utils/utils";
 import TabHistory from "./components/TabHistory";
 
 import "antd/dist/reset.css";
