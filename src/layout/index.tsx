@@ -54,7 +54,7 @@ const BasicLayout: FC = () => {
             <HeaderComp />
           </Header>
           {tagStatus && <TabHistory />}
-          <Content className={styles.layout}>
+          <Content className={styles.layout} id="contentLayout">
             <AuthRoute>
               <Outlet />
             </AuthRoute>

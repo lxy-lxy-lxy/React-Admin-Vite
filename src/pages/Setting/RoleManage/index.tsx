@@ -1,12 +1,11 @@
 import { FC, useRef } from "react";
 import ProTable from "@/components/ProTable";
-import { message, Space, Tag, Typography } from "antd";
+import { message, Space, Tag, Typography, Card } from "antd";
 import type { TableColumnsType } from "antd";
 import { useSetting } from "@/stores/setting";
 import Button from "@/components/Button";
 import RoleComp from "./components/RoleComp.tsx";
 import { statusObj } from "@/utils/enum.ts";
-import Page from "@/layout/components/Page.tsx";
 
 const { Text } = Typography;
 
@@ -85,7 +84,7 @@ const RoleManage: FC = () => {
   };
 
   return (
-    <Page>
+    <Card>
       <ProTable<Role.DataType>
         getData={getData}
         searchParams={{ ...searchParams }}
@@ -103,7 +102,7 @@ const RoleManage: FC = () => {
         onCreate={() => onOpen()}
       />
       <RoleComp ref={compRef} />
-    </Page>
+    </Card>
   );
 };
 export default RoleManage;

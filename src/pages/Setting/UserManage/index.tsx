@@ -1,12 +1,11 @@
 import { FC, useRef } from "react";
 import ProTable from "@/components/ProTable";
-import { message, Space, Tag } from "antd";
+import { message, Space, Tag, Card } from "antd";
 import type { TableColumnsType } from "antd";
 import { useSetting } from "@/stores/setting";
 import Button from "@/components/Button";
 import UserComp from "./components/UserComp.tsx";
 import { statusObj } from "@/utils/enum.ts";
-import Page from "@/layout/components/Page.tsx";
 
 const UserManage: FC = () => {
   const {
@@ -84,7 +83,7 @@ const UserManage: FC = () => {
   };
 
   return (
-    <Page>
+    <Card>
       <ProTable<User.DataType>
         getData={getData}
         searchParams={{ ...searchParams }}
@@ -102,7 +101,7 @@ const UserManage: FC = () => {
         onCreate={() => onOpen()}
       />
       <UserComp ref={compRef} />
-    </Page>
+    </Card>
   );
 };
 export default UserManage;

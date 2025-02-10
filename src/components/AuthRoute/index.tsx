@@ -4,7 +4,7 @@ import NoAuthPage from "@/components/NoAuthPage";
 import { useLoginStore } from "@/stores/index";
 // import { CSSTransition, SwitchTransition } from "react-transition-group";
 import NProgress from "nprogress";
-import { Card, Spin } from "antd";
+import { Spin } from "antd";
 
 import "nprogress/nprogress.css";
 import "./index.css";
@@ -37,9 +37,7 @@ const AuthRoute: FC<PropsWithChildren> = ({ children }) => {
   } else if (isAdmin || obj[pathname]) {
     return (
       <KeepAlive activeKey={pathname}>
-        <Card id="contentLayout" style={{ minHeight: "100%" }}>
-          <Suspense fallback={<Loading />}>{children}</Suspense>
-        </Card>
+        <Suspense fallback={<Loading />}>{children}</Suspense>
       </KeepAlive>
     );
   }

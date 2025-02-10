@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Radio } from "antd";
+import { Radio, Card } from "antd";
 import type { RadioChangeEvent } from "antd";
 
 const plainOptions = ["Apple", "Pear", "Orange"];
@@ -56,7 +56,7 @@ const RadioTool = () => {
     setValue4(value);
   };
   return (
-    <>
+    <Card>
       <Radio.Group options={plainOptions} onChange={onChange1} value={value1} />
       <br />
       <Radio.Group
@@ -81,7 +81,7 @@ const RadioTool = () => {
         optionType="button"
         buttonStyle="solid"
       />
-    </>
+    </Card>
   );
 };
 export default RadioTool;

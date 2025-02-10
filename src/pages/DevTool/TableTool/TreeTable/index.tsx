@@ -1,4 +1,4 @@
-import { Col, Row } from "antd";
+import { Col, Row, Card } from "antd";
 import ProTable from "@/components/ProTable";
 import type { TableColumnsType } from "antd";
 import { useTool } from "@/stores/tool";
@@ -62,27 +62,29 @@ const TreeTable = () => {
   };
 
   return (
-    <Row gutter={16}>
-      <Col xs={24} md={8} lg={6} xl={4}>
-        <SearchTree
-          data={menus}
-          fieldNames={{
-            key: "id",
-            title: "label",
-          }}
-        />
-      </Col>
-      <Col xs={24} md={16} lg={18} xl={20}>
-        <ProTable
-          getData={getData}
-          searchParams={{ ...searchParams }}
-          columns={columns}
-          dataSource={list}
-          total={total}
-          rowKey="id"
-        />
-      </Col>
-    </Row>
+    <Card>
+      <Row gutter={16}>
+        <Col xs={24} md={8} lg={6} xl={4}>
+          <SearchTree
+            data={menus}
+            fieldNames={{
+              key: "id",
+              title: "label",
+            }}
+          />
+        </Col>
+        <Col xs={24} md={16} lg={18} xl={20}>
+          <ProTable
+            getData={getData}
+            searchParams={{ ...searchParams }}
+            columns={columns}
+            dataSource={list}
+            total={total}
+            rowKey="id"
+          />
+        </Col>
+      </Row>
+    </Card>
   );
 };
 export default TreeTable;

@@ -1,5 +1,5 @@
 import { useState, FC } from "react";
-import { Checkbox, Divider } from "antd";
+import { Checkbox, Divider, Card } from "antd";
 import type { CheckboxProps } from "antd";
 
 const CheckboxGroup = Checkbox.Group;
@@ -23,7 +23,7 @@ const CheckTool: FC = () => {
   };
 
   return (
-    <>
+    <Card>
       <Checkbox
         indeterminate={indeterminate}
         onChange={onCheckAllChange}
@@ -31,13 +31,13 @@ const CheckTool: FC = () => {
       >
         Check all
       </Checkbox>
-      <Divider/>
+      <Divider />
       <CheckboxGroup
         options={plainOptions}
         value={checkedList}
         onChange={onChange}
       />
-    </>
+    </Card>
   );
 };
 

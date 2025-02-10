@@ -1,4 +1,4 @@
-import { Form, Input } from "antd";
+import { Form, Input, Card } from "antd";
 import ProTable from "@/components/ProTable";
 import ProSearch from "@/components/ProSearch";
 import type { TableColumnsType } from "antd";
@@ -57,7 +57,7 @@ const Table = () => {
   };
 
   return (
-    <>
+    <Card>
       <ProSearch
         formName="toolSearch"
         childNode={[
@@ -137,7 +137,7 @@ const Table = () => {
         total={total}
         rowKey="id"
       />
-    </>
+    </Card>
   );
 };
 export default Table;
