@@ -42,7 +42,7 @@ const BasicLayout: FC = () => {
             "--localeFont": ["cn", "hk"].includes(getLocale())
               ? `${(fontSize || 15) / 10}rem`
               : `${((fontSize || 15) - 4) / 10}rem`,
-            "--extraHeight": tagStatus ? "4.8rem" : "",
+            "--extraHeight": tagStatus ? "4.8rem" : "0rem",
             display: "none",
             minHeight: "100vh",
           } as CSSProperties
