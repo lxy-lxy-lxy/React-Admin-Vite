@@ -6,10 +6,10 @@ const Dashboard = () => {
   return (
     <Fragment>
       <Row wrap style={{ marginTop: 20 }} gutter={[16, 16]}>
-        <Col xs={24} md={24} lg={16}>
+        <Col xs={24} md={24} lg={14} xl={16} xxl={18}>
           <Card>WelCome</Card>
         </Col>
-        <Col xs={0} md={0} lg={8}>
+        <Col xs={0} md={0} lg={10} xl={8} xxl={6}>
           <Row gutter={[16, 16]}>
             <Col lg={24}>
               <HotCard />
