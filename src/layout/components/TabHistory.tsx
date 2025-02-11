@@ -1,7 +1,7 @@
 import { useEffect, useState, FC, MouseEvent, useContext } from "react";
 import { Flex, Layout, Tag, theme } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
-import { RouteContext } from "../../main.tsx";
+import { RouteContext } from "@/main.tsx";
 
 import styles from "../index.module.scss";
 

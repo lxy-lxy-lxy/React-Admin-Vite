@@ -11,7 +11,7 @@ import type { ForwardedRef } from "react";
 import Button from "@/components/Button";
 import { statusObj } from "@/utils/enum.ts";
 import SearchTree from "@/components/SearchTree";
-import { RouteContext } from "../../../../main.tsx";
+import { RouteContext } from "@/main.tsx";
 
 interface InitValues {
   role_id?: number;

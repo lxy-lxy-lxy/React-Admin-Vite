@@ -4,7 +4,7 @@ import type { TableColumnsType } from "antd";
 import { useTool } from "@/stores/tool";
 import SearchTree from "@/components/SearchTree";
 import { useContext } from "react";
-import { RouteContext } from "../../../../main.tsx";
+import { RouteContext } from "@/main.tsx";
 
 const columns: TableColumnsType = [
   {
