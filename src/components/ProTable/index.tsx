@@ -62,7 +62,7 @@ const ProTable: <T>(props: Props<T>) => ReactNode = (props) => {
   const { pathname } = useLocation();
   const { userConfig, setUserConfig } = useGlobalStore();
   const [fullscreen, setFullscreen] = useState(false);
-  const [height, setHeight] = useState<number | "max-content">("max-content");
+  const [height, setHeight] = useState<number | "max-content">(0);
   const curLoading = useLoading();
 
   useLayoutEffect(() => {
