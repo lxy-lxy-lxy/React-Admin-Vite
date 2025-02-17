@@ -1,5 +1,7 @@
 import React from "react";
+import { Card, Form, Input } from "antd";
 import { Line } from "@ant-design/plots";
+import ProSearch from "@/components/ProSearch";
 
 const DataBoard: React.FC = () => {
   const data = [
@@ -20,6 +22,40 @@ const DataBoard: React.FC = () => {
     yField: "value",
   };
 
-  return <Line {...config} />;
+  return (
+    <>
+      <Card className="mb-2" bodyStyle={{ paddingBottom: 0 }}>
+        <ProSearch
+          formName="toolSearch"
+          childNode={[
+            {
+              element: (
+                <Form.Item label={global.t("搜索1")} name="search1">
+                  <Input />
+                </Form.Item>
+              ),
+            },
+            {
+              element: (
+                <Form.Item label={global.t("名称1")} name="name1">
+                  <Input />
+                </Form.Item>
+              ),
+            },
+            {
+              element: (
+                <Form.Item label={global.t("搜索2")} name="search2">
+                  <Input />
+                </Form.Item>
+              ),
+            },
+          ]}
+        />
+      </Card>
+      <Card>
+        <Line {...config} />
+      </Card>
+    </>
+  );
 };
 export default DataBoard;

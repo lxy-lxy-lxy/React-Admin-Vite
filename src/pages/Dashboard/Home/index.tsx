@@ -7,7 +7,7 @@ import StatusCard from "@/pages/Dashboard/Home/components/StatusCard.tsx";
 const Dashboard = () => {
   return (
     <Fragment>
-      <Row wrap style={{ marginTop: 20 }} gutter={[16, 16]}>
+      <Row wrap gutter={[16, 16]}>
         <Col xs={24} md={24}>
           <Card>
             <Flex justify="space-between" align="center" wrap>

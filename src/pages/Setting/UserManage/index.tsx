@@ -57,6 +57,7 @@ const UserManage: FC = () => {
             </Button>
             <Button
               type="primary"
+              variant="outlined"
               onClick={() => {
                 message.success(global.t("模拟成功"));
                 getData();

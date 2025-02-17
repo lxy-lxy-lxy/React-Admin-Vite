@@ -57,87 +57,91 @@ const Table = () => {
   };
 
   return (
-    <Card>
-      <ProSearch
-        formName="toolSearch"
-        childNode={[
-          {
-            element: (
-              <Form.Item label={global.t("搜索1")} name="search1">
-                <Input />
-              </Form.Item>
-            ),
-          },
-          {
-            element: (
-              <Form.Item label={global.t("名称1")} name="name1">
-                <Input />
-              </Form.Item>
-            ),
-            countSpan: { xl: 2 },
-          },
-          {
-            element: (
-              <Form.Item label={global.t("搜索2")} name="search2">
-                <Input />
-              </Form.Item>
-            ),
-          },
-          {
-            element: (
-              <Form.Item label={global.t("名称2")} name="name2">
-                <Input />
-              </Form.Item>
-            ),
-          },
-          {
-            element: (
-              <Form.Item label={global.t("搜索3")} name="search3">
-                <Input />
-              </Form.Item>
-            ),
-            countSpan: { md: 2 },
-          },
-          {
-            element: (
-              <Form.Item label={global.t("名称3")} name="name3">
-                <Input />
-              </Form.Item>
-            ),
-          },
-          {
-            element: (
-              <Form.Item label={global.t("搜索3")} name="search3">
-                <Input />
-              </Form.Item>
-            ),
-          },
-          {
-            element: (
-              <Form.Item label={global.t("名称4")} name="name4">
-                <Input />
-              </Form.Item>
-            ),
-          },
-          {
-            element: (
-              <Form.Item label={global.t("名称4")} name="name4">
-                <Input />
-              </Form.Item>
-            ),
-            countSpan: { xxl: 2 },
-          },
-        ]}
-      />
-      <ProTable
-        getData={getData}
-        searchParams={{ ...searchParams }}
-        columns={columns}
-        dataSource={list}
-        total={total}
-        rowKey="id"
-      />
-    </Card>
+    <>
+      <Card className="mb-2" bodyStyle={{ paddingBottom: 0 }}>
+        <ProSearch
+          formName="toolSearch"
+          childNode={[
+            {
+              element: (
+                <Form.Item label={global.t("搜索1")} name="search1">
+                  <Input />
+                </Form.Item>
+              ),
+            },
+            {
+              element: (
+                <Form.Item label={global.t("名称1")} name="name1">
+                  <Input />
+                </Form.Item>
+              ),
+              countSpan: { xl: 2 },
+            },
+            {
+              element: (
+                <Form.Item label={global.t("搜索2")} name="search2">
+                  <Input />
+                </Form.Item>
+              ),
+            },
+            {
+              element: (
+                <Form.Item label={global.t("名称2")} name="name2">
+                  <Input />
+                </Form.Item>
+              ),
+            },
+            {
+              element: (
+                <Form.Item label={global.t("搜索3")} name="search3">
+                  <Input />
+                </Form.Item>
+              ),
+              countSpan: { md: 2 },
+            },
+            {
+              element: (
+                <Form.Item label={global.t("名称3")} name="name3">
+                  <Input />
+                </Form.Item>
+              ),
+            },
+            {
+              element: (
+                <Form.Item label={global.t("搜索3")} name="search3">
+                  <Input />
+                </Form.Item>
+              ),
+            },
+            {
+              element: (
+                <Form.Item label={global.t("名称4")} name="name4">
+                  <Input />
+                </Form.Item>
+              ),
+            },
+            {
+              element: (
+                <Form.Item label={global.t("名称4")} name="name4">
+                  <Input />
+                </Form.Item>
+              ),
+              countSpan: { xxl: 2 },
+            },
+          ]}
+        />
+      </Card>
+      <Card>
+        <ProTable
+          getData={getData}
+          searchParams={{ ...searchParams }}
+          columns={columns}
+          dataSource={list}
+          total={total}
+          rowKey="id"
+        />
+      </Card>
+    </>
   );
 };
 export default Table;
