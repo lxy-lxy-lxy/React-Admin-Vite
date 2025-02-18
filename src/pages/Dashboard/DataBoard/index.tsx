@@ -1,60 +1,37 @@
 import React from "react";
-import { Card, Form, Input } from "antd";
-import { Line } from "@ant-design/plots";
-import ProSearch from "@/components/ProSearch";
+import { Card, Row, Col, Tooltip } from "antd";
+import Search from "@/pages/Dashboard/DataBoard/components/Search.tsx";
+import StatisticCard from "@/pages/Dashboard/DataBoard/components/StatisticCard.tsx";
+import Indicators from "@/pages/Dashboard/DataBoard/components/Indicators.tsx";
+import Ranking from "@/pages/Dashboard/DataBoard/components/Ranking.tsx";
 
 const DataBoard: React.FC = () => {
-  const data = [
-    { year: "1991", value: 3 },
-    { year: "1992", value: 4 },
-    { year: "1993", value: 3.5 },
-    { year: "1994", value: 5 },
-    { year: "1995", value: 4.9 },
-    { year: "1996", value: 6 },
-    { year: "1997", value: 7 },
-    { year: "1998", value: 9 },
-    { year: "1999", value: 13 },
-  ];
-
-  const config = {
-    data,
-    xField: "year",
-    yField: "value",
-  };
-
   return (
     <>
       <Card className="mb-2" bodyStyle={{ paddingBottom: 0 }}>
-        <ProSearch
-          formName="toolSearch"
-          childNode={[
-            {
-              element: (
-                <Form.Item label={global.t("搜索1")} name="search1">
-                  <Input />
-                </Form.Item>
-              ),
-            },
-            {
-              element: (
-                <Form.Item label={global.t("名称1")} name="name1">
-                  <Input />
-                </Form.Item>
-              ),
-            },
-            {
-              element: (
-                <Form.Item label={global.t("搜索2")} name="search2">
-                  <Input />
-                </Form.Item>
-              ),
-            },
-          ]}
-        />
+        <Search />
       </Card>
-      <Card>
-        <Line {...config} />
+      <Card title={global.t("核心指标")} className="mb-2">
+        <StatisticCard />
       </Card>
+      <Row gutter={10}>
+        <Col lg={24} xl={16}>
+          <Card
+            title={
+              <Tooltip title="prompt text">
+                <span>{global.t("大盘指标")}</span>
+              </Tooltip>
+            }
+          >
+            <Indicators />
+          </Card>
+        </Col>
+        <Col lg={24} xl={8}>
+          <Card title={global.t("产品好评度排行")}>
+            <Ranking />
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 };
