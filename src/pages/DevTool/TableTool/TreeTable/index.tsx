@@ -62,29 +62,33 @@ const TreeTable = () => {
   };
 
   return (
-    <Card>
+    <>
       <Row gutter={16}>
-        <Col xs={24} md={8} lg={6} xl={4}>
-          <SearchTree
-            data={menus}
-            fieldNames={{
-              key: "id",
-              title: "label",
-            }}
-          />
+        <Col xs={24} md={12} lg={8} xl={6}>
+          <Card>
+            <SearchTree
+              data={menus}
+              fieldNames={{
+                key: "id",
+                title: "label",
+              }}
+            />
+          </Card>
         </Col>
-        <Col xs={24} md={16} lg={18} xl={20}>
-          <ProTable
-            getData={getData}
-            searchParams={{ ...searchParams }}
-            columns={columns}
-            dataSource={list}
-            total={total}
-            rowKey="id"
-          />
+        <Col xs={24} md={12} lg={16} xl={18}>
+          <Card>
+            <ProTable
+              getData={getData}
+              searchParams={{ ...searchParams }}
+              columns={columns}
+              dataSource={list}
+              total={total}
+              rowKey="id"
+            />
+          </Card>
         </Col>
       </Row>
-    </Card>
+    </>
   );
 };
 export default TreeTable;
