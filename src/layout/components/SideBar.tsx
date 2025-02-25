@@ -28,7 +28,7 @@ const SideBar: FC = () => {
   } = useContext(RouteContext)!;
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { themeConfig, deviceInfo } = useGlobalStore();
+  const { themeConfig, deviceInfo, setThemeConfig } = useGlobalStore();
   const { collapsed } = themeConfig;
   const { userInfo } = useLoginStore();
   const [childMenus, setChildMenus] = useState<RootLayout.SideMenu[] | []>([]);
@@ -50,6 +50,10 @@ const SideBar: FC = () => {
     const isChild = type === "child";
     if (isChild) {
       navigate(key);
+      if (deviceInfo.isPhone)
+        setThemeConfig({
+          collapsed: true,
+        });
     }
     if (!isChild) {
       setChildMenus(menus.find((item) => item.key === key)?.children || []);
@@ -71,28 +75,29 @@ const SideBar: FC = () => {
 
   return (
     <Fragment>
-      {(!deviceInfo.isPhone || !collapsed) && (
-        <Sider
+      <Sider
+        theme={!themeConfig.menuExtend ? "dark" : "light"}
+        collapsible={false}
+        collapsed={false}
+        className={styles.firstSider}
+        style={{
+          display: !deviceInfo.isPhone || !collapsed ? "block" : "none",
+        }}
+      >
+        <div className={styles.siderLogo} onClick={() => navigate("")}>
+          <img alt="" src={logo} width={35} height={35} />
+        </div>
+        <Menu
           theme={!themeConfig.menuExtend ? "dark" : "light"}
-          collapsible={false}
-          collapsed={false}
-          className={styles.firstSider}
-        >
-          <div className={styles.siderLogo}>
-            <img alt="" src={logo} width={45} height={45} />
-          </div>
-          <Menu
-            theme={!themeConfig.menuExtend ? "dark" : "light"}
-            selectedKeys={parentSelectedKey}
-            items={
-              collapsed
-                ? menus
-                : menus.map((item) => ({ ...item, children: null }))
-            }
-            onClick={(e) => onMenuClick(e, collapsed ? "child" : "parent")}
-          />
-        </Sider>
-      )}
+          selectedKeys={parentSelectedKey}
+          items={
+            collapsed
+              ? menus
+              : menus.map((item) => ({ ...item, children: null }))
+          }
+          onClick={(e) => onMenuClick(e, collapsed ? "child" : "parent")}
+        />
+      </Sider>
       <Sider
         className={styles.secondSider}
         theme="light"
@@ -116,6 +121,15 @@ const SideBar: FC = () => {
           onClick={onMenuClick}
         />
       </Sider>
+      <div
+        className={styles.siderOverlay}
+        style={{ display: deviceInfo.isPhone && !collapsed ? "block" : "none" }}
+        onClick={() =>
+          setThemeConfig({
+            collapsed: !collapsed,
+          })
+        }
+      />
     </Fragment>
   );
 };

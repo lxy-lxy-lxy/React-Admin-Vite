@@ -45,7 +45,7 @@ export function getErrorStr(ec: number | string) {
 }
 
 export function isMobile() {
-  return window.innerWidth < 500;
+  return window.innerWidth < 576;
 }
 
 interface LoadingState {

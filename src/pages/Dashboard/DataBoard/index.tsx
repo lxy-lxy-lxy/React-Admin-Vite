@@ -3,7 +3,7 @@ import { Card, Row, Col, Tooltip } from "antd";
 import Search from "@/pages/Dashboard/DataBoard/components/Search.tsx";
 import StatisticCard from "@/pages/Dashboard/DataBoard/components/StatisticCard.tsx";
 import Indicators from "@/pages/Dashboard/DataBoard/components/Indicators.tsx";
-import Ranking from "@/pages/Dashboard/DataBoard/components/Ranking.tsx";
+// import Ranking from "@/pages/Dashboard/DataBoard/components/Ranking.tsx";
 
 const DataBoard: React.FC = () => {
   return (
@@ -27,9 +27,7 @@ const DataBoard: React.FC = () => {
           </Card>
         </Col>
         <Col lg={24} xl={8}>
-          <Card title={global.t("产品好评度排行")}>
-            <Ranking />
-          </Card>
+          <Card title={global.t("产品好评度排行")}>{/*<Ranking />*/}</Card>
         </Col>
       </Row>
     </>
